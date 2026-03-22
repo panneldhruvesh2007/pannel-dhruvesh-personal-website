@@ -10,7 +10,10 @@ from slowapi.errors import RateLimitExceeded
 from .config import settings
 from .routes.contact_route import router as contact_router
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+)
 logger = logging.getLogger(__name__)
 
 limiter = Limiter(key_func=get_remote_address)
@@ -18,12 +21,8 @@ limiter = Limiter(key_func=get_remote_address)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    if not settings.SUPABASE_URL:
-        logger.warning("SUPABASE_URL not set — check your .env file")
-    if not settings.ALLOWED_ORIGINS:
-        logger.warning("ALLOWED_ORIGINS is empty — all CORS requests will be blocked!")
-    else:
-        logger.info(f"CORS allowed origins: {settings.ALLOWED_ORIGINS}")
+    # Print full settings validation on every startup — visible in Render logs
+    settings.validate()
     logger.info("Portfolio API started")
     yield
     logger.info("Portfolio API stopped")
@@ -38,10 +37,14 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
+# Handle wildcard CORS correctly
+_origins     = settings.ALLOWED_ORIGINS
+_allow_all   = _origins == ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
-    allow_credentials=True,
+    allow_origins=["*"] if _allow_all else _origins,
+    allow_credentials=False if _allow_all else True,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization", "Accept"],
 )
@@ -49,6 +52,18 @@ app.add_middleware(
 # ── Routes ────────────────────────────────────────────────
 app.include_router(contact_router)
 
+
 @app.get("/")
 async def root():
     return {"status": "ok", "message": "Portfolio API is running"}
+
+
+@app.get("/health")
+async def health():
+    """Detailed health check — useful for debugging on Render."""
+    return {
+        "status": "ok",
+        "supabase_configured": bool(settings.SUPABASE_URL and settings.SUPABASE_KEY),
+        "email_configured":    bool(settings.SMTP_USER and settings.SMTP_PASS and settings.NOTIFY_EMAIL),
+        "allowed_origins":     settings.ALLOWED_ORIGINS,
+    }

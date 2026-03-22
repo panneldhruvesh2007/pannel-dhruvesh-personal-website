@@ -6,14 +6,19 @@ load_dotenv()
 
 logger = logging.getLogger(__name__)
 
+
 def _parse_origins(raw: str) -> list[str]:
     """
     Parse a comma-separated origins string.
-    - Strips whitespace from each entry
-    - Drops empty strings
-    - Drops entries that don't start with http:// or https://
-    - Logs a warning for any invalid entry
+    Accepts '*' as a wildcard (allow all origins).
+    Strips whitespace, drops empty strings, validates http/https prefix.
     """
+    raw = raw.strip()
+
+    # Wildcard — allow all origins (useful for early dev/testing)
+    if raw == "*":
+        return ["*"]
+
     origins = []
     for entry in raw.split(","):
         o = entry.strip()
@@ -27,15 +32,14 @@ def _parse_origins(raw: str) -> list[str]:
 
 
 class Settings:
-    SUPABASE_URL: str  = os.environ.get("SUPABASE_URL", "")
-    SUPABASE_KEY: str  = os.environ.get("SUPABASE_KEY", "")
-    SMTP_HOST: str     = os.environ.get("SMTP_HOST", "")
+    SUPABASE_URL: str  = os.environ.get("SUPABASE_URL", "").strip()
+    SUPABASE_KEY: str  = os.environ.get("SUPABASE_KEY", "").strip()
+    SMTP_HOST: str     = os.environ.get("SMTP_HOST", "smtp.gmail.com").strip()
     SMTP_PORT: int     = int(os.environ.get("SMTP_PORT", 587))
-    SMTP_USER: str     = os.environ.get("SMTP_USER", "")
-    SMTP_PASS: str     = os.environ.get("SMTP_PASS", "")
-    NOTIFY_EMAIL: str  = os.environ.get("NOTIFY_EMAIL", "")
+    SMTP_USER: str     = os.environ.get("SMTP_USER", "").strip()
+    SMTP_PASS: str     = os.environ.get("SMTP_PASS", "").strip()
+    NOTIFY_EMAIL: str  = os.environ.get("NOTIFY_EMAIL", "").strip()
 
-    # Default includes common local dev ports — override in production .env
     ALLOWED_ORIGINS: list[str] = _parse_origins(
         os.environ.get(
             "ALLOWED_ORIGINS",
@@ -44,6 +48,20 @@ class Settings:
             "http://localhost:8080,http://127.0.0.1:8080"
         )
     )
+
+    def validate(self) -> None:
+        """Log a clear startup report of all critical settings."""
+        logger.info("=" * 50)
+        logger.info("SETTINGS VALIDATION")
+        logger.info(f"  SUPABASE_URL   : {'✓ set' if self.SUPABASE_URL  else '✗ MISSING'}")
+        logger.info(f"  SUPABASE_KEY   : {'✓ set' if self.SUPABASE_KEY  else '✗ MISSING'}")
+        logger.info(f"  SMTP_USER      : {'✓ set' if self.SMTP_USER     else '✗ not set (email disabled)'}")
+        logger.info(f"  SMTP_PASS      : {'✓ set' if self.SMTP_PASS     else '✗ not set (email disabled)'}")
+        logger.info(f"  NOTIFY_EMAIL   : {self.NOTIFY_EMAIL or '✗ not set'}")
+        logger.info(f"  ALLOWED_ORIGINS: {self.ALLOWED_ORIGINS}")
+        logger.info("=" * 50)
+        if not self.SUPABASE_URL or not self.SUPABASE_KEY:
+            logger.error("FATAL: SUPABASE_URL and SUPABASE_KEY are required — contacts will NOT be saved!")
 
 
 settings = Settings()
