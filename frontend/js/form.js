@@ -75,7 +75,7 @@ export function initForm() {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify(data),
-    }, 60000).catch(err => console.warn('Backend error:', err));
+    }, 60000).catch(() => {});
 
     // Always try EmailJS for email notification (non-blocking)
     const emailPromise = emailjsReady
@@ -85,7 +85,7 @@ export function initForm() {
           phone:      data.phone,
           purpose:    data.purpose,
           message:    data.message,
-        }).catch(err => console.warn('EmailJS error:', err))
+        }).catch(() => {})
       : Promise.resolve();
 
     // Wait for both

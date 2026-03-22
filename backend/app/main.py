@@ -1,8 +1,9 @@
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
@@ -32,6 +33,9 @@ app = FastAPI(
     title="Pannel Dhruvesh — Portfolio API",
     version="1.0.0",
     lifespan=lifespan,
+    docs_url=None,
+    redoc_url=None,
+    openapi_url=None,
 )
 
 app.state.limiter = limiter
@@ -49,6 +53,17 @@ app.add_middleware(
     allow_headers=["Content-Type", "Authorization", "Accept"],
 )
 
+# ── Security headers middleware ───────────────────────────
+@app.middleware("http")
+async def security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    return response
+
 # ── Routes ────────────────────────────────────────────────
 app.include_router(contact_router)
 
@@ -60,10 +75,4 @@ async def root():
 
 @app.get("/health")
 async def health():
-    """Detailed health check — useful for debugging on Render."""
-    return {
-        "status": "ok",
-        "supabase_configured": bool(settings.SUPABASE_URL and settings.SUPABASE_KEY),
-        "email_configured":    bool(settings.SMTP_USER and settings.SMTP_PASS and settings.NOTIFY_EMAIL),
-        "allowed_origins":     settings.ALLOWED_ORIGINS,
-    }
+    return {"status": "ok"}
