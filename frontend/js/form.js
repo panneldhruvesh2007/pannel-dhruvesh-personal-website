@@ -64,56 +64,32 @@ export function initForm() {
 
     const data = Object.fromEntries(new FormData(form));
 
-    // ── Try EmailJS first ──────────────────────────────────
+    // ── Fire backend (Supabase) + EmailJS in parallel ─────
     const emailjsReady = typeof emailjs !== 'undefined'
       && EMAILJS_SERVICE_ID  !== 'YOUR_SERVICE_ID'
       && EMAILJS_TEMPLATE_ID !== 'YOUR_TEMPLATE_ID'
       && EMAILJS_PUBLIC_KEY  !== 'YOUR_PUBLIC_KEY';
 
-    if (emailjsReady) {
-      try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+    // Always try backend for Supabase save (non-blocking)
+    const backendPromise = fetchWithTimeout(BACKEND_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(data),
+    }, 60000).catch(err => console.warn('Backend error:', err));
+
+    // Always try EmailJS for email notification (non-blocking)
+    const emailPromise = emailjsReady
+      ? emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
           from_name:  data.name,
           from_email: data.email,
           phone:      data.phone,
           purpose:    data.purpose,
           message:    data.message,
-        });
-        showSuccess();
-        return;
-      } catch (err) {
-        console.warn('EmailJS failed, trying backend...', err);
-      }
-    }
+        }).catch(err => console.warn('EmailJS error:', err))
+      : Promise.resolve();
 
-    // ── Try FastAPI backend ────────────────────────────────
-    try {
-      const res  = await fetchWithTimeout(BACKEND_URL, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(data),
-      }, 8000);
-      const json = await res.json();
-      if (res.ok && json.status === 'success') {
-        showSuccess();
-        return;
-      }
-    } catch (_) { /* backend not running or timed out */ }
-
-    // ── Fallback: mailto link ──────────────────────────────
-    const subject = encodeURIComponent(`[Portfolio] ${data.purpose} from ${data.name}`);
-    const body    = encodeURIComponent(
-      `Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nPurpose: ${data.purpose}\n\nMessage:\n${data.message}`
-    );
-    const mailOpened = window.open(`mailto:panneldhruvesh2007@gmail.com?subject=${subject}&body=${body}`);
-
-    // Show appropriate feedback
-    if (!mailOpened) {
-      btn.disabled  = false;
-      btn.innerHTML = originalHTML;
-      showError('Could not send automatically. Please email panneldhruvesh2007@gmail.com directly.');
-      return;
-    }
+    // Wait for both
+    await Promise.all([backendPromise, emailPromise]);
     showSuccess();
 
     function showSuccess() {
