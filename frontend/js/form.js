@@ -1,0 +1,158 @@
+// ── CONTACT FORM ───────────────────────────────────────────
+
+// ── EmailJS (optional) ────────────────────────────────────
+// Get your free IDs from https://www.emailjs.com
+// Leave as 'YOUR_...' to skip EmailJS and use the backend instead
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+
+// ── Backend API URL ───────────────────────────────────────
+// Development : points to local FastAPI server
+// Production  : set your Render/Railway URL below
+//
+// HOW TO UPDATE FOR PRODUCTION:
+//   Replace 'https://your-api.onrender.com' with your actual deployed API URL
+//
+const API_BASE_URL = (() => {
+  const host = window.location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1') {
+    return 'http://localhost:8000';
+  }
+  // ✏️  Replace this with your deployed backend URL before going live
+  return 'https://your-api.onrender.com';
+})();
+
+const BACKEND_URL = `${API_BASE_URL}/contact`;
+
+// Fetch with timeout helper
+function fetchWithTimeout(url, options, ms = 8000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), ms);
+  return fetch(url, { ...options, signal: controller.signal })
+    .finally(() => clearTimeout(id));
+}
+
+export function initForm() {
+  const form  = document.getElementById('contactForm');
+  const toast = document.getElementById('toast');
+  if (!form) return;
+
+  const rules = {
+    name:    v => v.trim().length < 2                        ? 'Name must be at least 2 characters' : '',
+    email:   v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)      ? '' : 'Enter a valid email',
+    phone:   v => v.replace(/\D/g,'').length < 10            ? 'Enter a valid phone number' : '',
+    purpose: v => !v                                         ? 'Please select a purpose' : '',
+    message: v => v.trim().length < 10                       ? 'Message must be at least 10 characters' : '',
+  };
+
+  function validate(field) {
+    const fg  = field.closest('.fg');
+    const err = fg?.querySelector('.ferr');
+    if (!fg || !err) return true;
+    const msg = rules[field.name] ? rules[field.name](field.value) : '';
+    if (msg) {
+      fg.classList.add('err');
+      err.textContent = msg;
+      try { gsap.fromTo(fg, { x: -8 }, { x: 0, duration: .4, ease: 'elastic.out(1,.3)' }); } catch(e){}
+      return false;
+    }
+    fg.classList.remove('err');
+    err.textContent = '';
+    return true;
+  }
+
+  form.querySelectorAll('input,select,textarea').forEach(f => {
+    f.addEventListener('blur',  () => validate(f));
+    f.addEventListener('input', () => { if (f.closest('.fg')?.classList.contains('err')) validate(f); });
+  });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    // Validate all fields
+    let ok = true;
+    form.querySelectorAll('input,select,textarea').forEach(f => { if (!validate(f)) ok = false; });
+    if (!ok) return;
+
+    const btn = form.querySelector('button[type="submit"]');
+    const originalHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+    const data = Object.fromEntries(new FormData(form));
+
+    // ── Try EmailJS first ──────────────────────────────────
+    const emailjsReady = typeof emailjs !== 'undefined'
+      && EMAILJS_SERVICE_ID  !== 'YOUR_SERVICE_ID'
+      && EMAILJS_TEMPLATE_ID !== 'YOUR_TEMPLATE_ID'
+      && EMAILJS_PUBLIC_KEY  !== 'YOUR_PUBLIC_KEY';
+
+    if (emailjsReady) {
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          from_name:  data.name,
+          from_email: data.email,
+          phone:      data.phone,
+          purpose:    data.purpose,
+          message:    data.message,
+          to_email:   'panneldhruvesh2007@gmail.com',
+        }, EMAILJS_PUBLIC_KEY);
+        showSuccess();
+        return;
+      } catch (err) {
+        console.warn('EmailJS failed, trying backend...', err);
+      }
+    }
+
+    // ── Try FastAPI backend ────────────────────────────────
+    try {
+      const res  = await fetchWithTimeout(BACKEND_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(data),
+      }, 8000);
+      const json = await res.json();
+      if (res.ok && json.status === 'success') {
+        showSuccess();
+        return;
+      }
+    } catch (_) { /* backend not running or timed out */ }
+
+    // ── Fallback: mailto link ──────────────────────────────
+    const subject = encodeURIComponent(`[Portfolio] ${data.purpose} from ${data.name}`);
+    const body    = encodeURIComponent(
+      `Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nPurpose: ${data.purpose}\n\nMessage:\n${data.message}`
+    );
+    const mailOpened = window.open(`mailto:panneldhruvesh2007@gmail.com?subject=${subject}&body=${body}`);
+
+    // Show appropriate feedback
+    if (!mailOpened) {
+      btn.disabled  = false;
+      btn.innerHTML = originalHTML;
+      showError('Could not send automatically. Please email panneldhruvesh2007@gmail.com directly.');
+      return;
+    }
+    showSuccess();
+
+    function showSuccess() {
+      btn.disabled  = false;
+      btn.innerHTML = originalHTML;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 4000);
+      form.reset();
+    }
+
+    function showError(msg) {
+      const errEl = form.querySelector('.form-global-err') || (() => {
+        const d = document.createElement('p');
+        d.className = 'form-global-err';
+        d.style.cssText = 'color:#f87171;font-size:.85rem;margin-top:.5rem;text-align:center';
+        form.appendChild(d);
+        return d;
+      })();
+      errEl.textContent = msg;
+      setTimeout(() => { errEl.textContent = ''; }, 6000);
+    }
+  });
+}
