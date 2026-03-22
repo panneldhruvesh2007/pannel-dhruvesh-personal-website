@@ -23,6 +23,39 @@ export function initAnimations() {
     setTimeout(() => el.classList.add('aos-animate'), delay + 100);
   });
 
+  // Count-up animation for stats
+  function countUp(el) {
+    const raw = el.textContent.trim();
+    const suffix = raw.replace(/[\d.]/g, ''); // e.g. '+', '∞'
+    const num = parseFloat(raw);
+    if (isNaN(num)) return; // skip '∞' etc.
+    const isDecimal = raw.includes('.');
+    const duration = 1800;
+    const start = performance.now();
+    const update = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = eased * num;
+      el.textContent = (isDecimal ? value.toFixed(1) : Math.floor(value)) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+      else el.textContent = (isDecimal ? num.toFixed(1) : num) + suffix;
+    };
+    requestAnimationFrame(update);
+  }
+
+  const statNums = document.querySelectorAll('.astat-n');
+  if (statNums.length) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          countUp(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    statNums.forEach(el => observer.observe(el));
+  }
+
   // GSAP
   try {
     gsap.registerPlugin(ScrollTrigger);
