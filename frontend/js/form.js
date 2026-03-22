@@ -1,29 +1,11 @@
 // ── CONTACT FORM ───────────────────────────────────────────
+// EmailJS (optional) — fill in your IDs from emailjs.com
+const EMAILJS_SERVICE_ID  = 'service_ag2vv99';
+const EMAILJS_TEMPLATE_ID = 'template_wjlx3ds';
+const EMAILJS_PUBLIC_KEY  = 'dVLVlpoZjs5-mOdVj';
 
-// ── EmailJS (optional) ────────────────────────────────────
-// Get your free IDs from https://www.emailjs.com
-// Leave as 'YOUR_...' to skip EmailJS and use the backend instead
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
-
-// ── Backend API URL ───────────────────────────────────────
-// Development : points to local FastAPI server
-// Production  : set your Render/Railway URL below
-//
-// HOW TO UPDATE FOR PRODUCTION:
-//   Replace 'https://your-api.onrender.com' with your actual deployed API URL
-//
-const API_BASE_URL = (() => {
-  const host = window.location.hostname;
-  if (host === 'localhost' || host === '127.0.0.1') {
-    return 'http://localhost:8000';
-  }
-  // ✏️  Replace this with your deployed backend URL before going live
-  return 'https://your-api.onrender.com';
-})();
-
-const BACKEND_URL = `${API_BASE_URL}/contact`;
+// Backend URL — always points to Render (works both locally and in production)
+const BACKEND_URL = 'https://pannel-backend.onrender.com/contact';
 
 // Fetch with timeout helper
 function fetchWithTimeout(url, options, ms = 8000) {

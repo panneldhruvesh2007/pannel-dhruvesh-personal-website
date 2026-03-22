@@ -51,7 +51,7 @@
       img.src = 'assets/images/profile.jpg';
     })();
   </script>
-
+ 
   <!-- ░░ INTRO SPLASH ░░ -->
   <div id="introScreen" class="intro-screen">
 
@@ -157,6 +157,11 @@
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof emailjs !== 'undefined') emailjs.init('dVLVlpoZjs5-mOdVj');
+    });
+  </script>
   <script type="module" src="assets/js/main.js"></script>
 
 </body>
