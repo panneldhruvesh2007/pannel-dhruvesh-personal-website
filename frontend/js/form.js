@@ -1,7 +1,7 @@
 // ── CONTACT FORM ───────────────────────────────────────────
 // EmailJS (optional) — fill in your IDs from emailjs.com
 const EMAILJS_SERVICE_ID  = 'service_ag2vv99';
-const EMAILJS_TEMPLATE_ID = 'template_wjlx3ds';
+const EMAILJS_TEMPLATE_ID = 'template_h007dew';
 const EMAILJS_PUBLIC_KEY  = 'dVLVlpoZjs5-mOdVj';
 
 // Backend URL — always points to Render (works both locally and in production)
@@ -78,8 +78,7 @@ export function initForm() {
           phone:      data.phone,
           purpose:    data.purpose,
           message:    data.message,
-          to_email:   'panneldhruvesh2007@gmail.com',
-        }, EMAILJS_PUBLIC_KEY);
+        });
         showSuccess();
         return;
       } catch (err) {
