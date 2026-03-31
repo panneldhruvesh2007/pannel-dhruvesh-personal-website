@@ -3341,3 +3341,8 @@ html { scroll-padding-top: 80px; }
   .pc-next { right: 4px; }
   .pc-popular-tag { font-size: .6rem; padding: .25rem .6rem; }
 }
+
+/* Hide carousel arrows on mobile */
+@media (max-width: 768px) {
+  .pc-arrow, .sk-arrow { display: none !important; }
+}
