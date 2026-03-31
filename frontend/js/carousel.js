@@ -19,7 +19,11 @@ export function initCarousel() {
   });
 
   const getCardWidth  = () => cards[0] ? cards[0].offsetWidth + 28 : 328;
-  const getOffset = i => (outer.offsetWidth / 2) - (getCardWidth() * i) - (cards[0].offsetWidth / 2);
+  const getOffset = i => {
+    const ow = outer.offsetWidth;
+    const cw = cards[0] ? cards[0].offsetWidth : 300;
+    return Math.round((ow - cw) / 2) - i * (cw + 28);
+  };
 
   function apply3D() {
     cards.forEach((c, i) => {
@@ -51,6 +55,7 @@ export function initCarousel() {
   }
 
   goTo(0);
+  window.addEventListener('load', () => goTo(current));
   window.addEventListener('resize', () => goTo(current));
   btnPrev.addEventListener('click', () => goTo(current - 1));
   btnNext.addEventListener('click', () => goTo(current + 1));

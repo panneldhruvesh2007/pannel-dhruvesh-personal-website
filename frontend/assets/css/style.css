@@ -3327,17 +3327,23 @@ html { scroll-padding-top: 80px; }
    MOBILE CAROUSEL — skills & pricing same behavior
    ============================================================ */
 @media (max-width: 768px) {
-  /* Skills — just hide arrows, keep carousel working */
+  /* Skills — same as existing */
   .sk-arrow { display: none !important; }
   .sk-carousel-outer { overflow: hidden; }
 
-  /* Pricing — same as skills, just narrower cards */
-  .pc-arrow { display: none !important; }
-  .pc-carousel-outer { overflow: hidden; }
-  .pc-card { width: 260px; min-height: auto; padding: 1.5rem 1.25rem; }
-  .pc-amt { font-size: 1.5rem; }
-  .pc-card-features li { font-size: .82rem; }
-  .pc-popular-tag { font-size: .62rem; }
+  /* Pricing — exact same as skills mobile */
+  .pc-arrow { display: none; }
+  .pc-carousel-outer { perspective: none; padding: 40px 0 72px; overflow: hidden; }
+  .pc-carousel-track { transform-style: flat; gap: 14px; }
+  .pc-card { width: clamp(240px, 78vw, 300px); min-height: auto; backface-visibility: visible; }
+}
+
+@media (max-width: 480px) {
+  .pc-card { width: clamp(220px, 88vw, 280px); padding: 1.5rem 1.25rem; }
+  .pc-carousel-outer { padding: 32px 0 64px; }
+  .pc-amt { font-size: 1.4rem; }
+  .pc-card-features li { font-size: .8rem; }
+  .pc-card-title { font-size: 1.1rem; }
 }
 
 /* ============================================================
