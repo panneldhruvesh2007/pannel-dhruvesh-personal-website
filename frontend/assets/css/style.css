@@ -3325,12 +3325,28 @@ html { scroll-padding-top: 80px; }
   .pc-carousel-outer {
     padding: 30px 0 60px;
     overflow: hidden;
+    perspective: none;
+  }
+  .pc-carousel-track {
+    transform-style: flat;
+    gap: 16px;
   }
   .pc-card {
-    width: calc(100vw - 60px);
+    width: calc(100vw - 48px);
     min-height: auto;
     padding: 1.75rem 1.25rem 1.5rem;
     border-radius: 16px;
+    /* Disable 3D tilt on mobile — show flat */
+    transform: scale(0.92) !important;
+    opacity: 0.5 !important;
+  }
+  .pc-card.active {
+    transform: scale(1) !important;
+    opacity: 1 !important;
+  }
+  .pc-card.adjacent {
+    transform: scale(0.88) !important;
+    opacity: 0.4 !important;
   }
   .pc-card-bg-icon { font-size: 6rem; }
   .pc-card-icon { font-size: 1.75rem; }
@@ -3342,13 +3358,11 @@ html { scroll-padding-top: 80px; }
   .pc-choose-btn { font-size: .85rem; padding: .75rem 1rem; }
   .pc-wa-icon { width: 40px; height: 40px; font-size: 1.1rem; }
   .pc-popular-tag { font-size: .62rem; padding: .28rem .7rem; }
-
-  /* Hide arrows on mobile — swipe instead */
   .pc-arrow { display: none !important; }
 }
 
 @media (max-width: 400px) {
-  .pc-card { width: calc(100vw - 40px); padding: 1.5rem 1rem; }
+  .pc-card { width: calc(100vw - 32px); padding: 1.5rem 1rem; }
   .pc-amt { font-size: 1.5rem; }
   .pc-card-features li { font-size: .78rem; }
 }

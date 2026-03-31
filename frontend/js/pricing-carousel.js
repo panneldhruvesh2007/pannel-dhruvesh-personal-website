@@ -20,8 +20,14 @@ export function initPricingCarousel() {
     dotsEl.appendChild(d);
   });
 
-  const getCardWidth = () => cards[0] ? cards[0].offsetWidth + 28 : 348;
-  const getOffset   = i => (outer.offsetWidth / 2) - (getCardWidth() * i) - (cards[0].offsetWidth / 2);
+  const gap = 28;
+  const getCardWidth = () => cards[0] ? cards[0].offsetWidth + gap : 348;
+  const getOffset = i => {
+    const outerW = outer.offsetWidth;
+    const cardW  = cards[0] ? cards[0].offsetWidth : 320;
+    // Center the active card in the outer container
+    return (outerW / 2) - (cardW / 2) - (i * (cardW + gap));
+  };
 
   function apply3D() {
     cards.forEach((c, i) => {
@@ -52,14 +58,23 @@ export function initPricingCarousel() {
     updateClasses();
   }
 
-  goTo(current);
-  window.addEventListener('resize', () => goTo(current));
-  btnPrev.addEventListener('click', () => goTo(current - 1));
-  btnNext.addEventListener('click', () => goTo(current + 1));
+  // Wait for layout to settle before first render
+  requestAnimationFrame(() => {
+    goTo(current);
+  });
 
-  // Drag
-  const dragStart = x => { isDragging = true; startX = x; startTranslate = currentTranslate; track.classList.add('dragging'); };
-  const dragMove  = x => {
+  window.addEventListener('resize', () => goTo(current));
+  btnPrev && btnPrev.addEventListener('click', () => goTo(current - 1));
+  btnNext && btnNext.addEventListener('click', () => goTo(current + 1));
+
+  // Drag / swipe
+  const dragStart = x => {
+    isDragging = true;
+    startX = x;
+    startTranslate = currentTranslate;
+    track.classList.add('dragging');
+  };
+  const dragMove = x => {
     if (!isDragging) return;
     const delta = x - startX;
     track.style.transform = `translateX(${startTranslate + delta}px)`;
@@ -75,7 +90,7 @@ export function initPricingCarousel() {
     if (!isDragging) return;
     isDragging = false;
     const delta = x - startX;
-    goTo(Math.abs(delta) > 60 ? (delta < 0 ? current + 1 : current - 1) : current);
+    goTo(Math.abs(delta) > 50 ? (delta < 0 ? current + 1 : current - 1) : current);
   };
 
   track.addEventListener('mousedown',  e => dragStart(e.clientX));
