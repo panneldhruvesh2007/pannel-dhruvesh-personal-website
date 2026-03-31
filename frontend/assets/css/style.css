@@ -3327,23 +3327,40 @@ html { scroll-padding-top: 80px; }
    MOBILE CAROUSEL — skills & pricing same behavior
    ============================================================ */
 @media (max-width: 768px) {
-  /* Skills — same as existing */
-  .sk-arrow { display: none !important; }
-  .sk-carousel-outer { overflow: hidden; }
-
-  /* Pricing — exact same as skills mobile */
+  .sk-arrow { display: none; }
   .pc-arrow { display: none; }
-  .pc-carousel-outer { perspective: none; padding: 40px 0 72px; overflow: hidden; }
-  .pc-carousel-track { transform-style: flat; gap: 14px; }
-  .pc-card { width: clamp(240px, 78vw, 300px); min-height: auto; backface-visibility: visible; }
+
+  .sk-carousel-outer,
+  .pc-carousel-outer {
+    overflow: hidden;
+    perspective: none;
+    padding: 40px 0 72px;
+  }
+
+  .sk-carousel-track,
+  .pc-carousel-track {
+    transform-style: flat;
+    gap: 12px;
+  }
+
+  .sk-card {
+    width: clamp(260px, 82vw, 340px);
+    min-height: 300px;
+    backface-visibility: visible;
+  }
+
+  .pc-card {
+    width: clamp(260px, 82vw, 340px);
+    min-height: auto;
+    backface-visibility: visible;
+  }
 }
 
 @media (max-width: 480px) {
-  .pc-card { width: clamp(220px, 88vw, 280px); padding: 1.5rem 1.25rem; }
-  .pc-carousel-outer { padding: 32px 0 64px; }
+  .sk-card { width: clamp(240px, 86vw, 300px); min-height: 280px; padding: 1.5rem 1.25rem; }
+  .pc-card { width: clamp(240px, 86vw, 300px); padding: 1.5rem 1.25rem; }
   .pc-amt { font-size: 1.4rem; }
   .pc-card-features li { font-size: .8rem; }
-  .pc-card-title { font-size: 1.1rem; }
 }
 
 /* ============================================================

@@ -18,12 +18,12 @@ export function initPricingCarousel() {
     dotsEl.appendChild(d);
   });
 
-  // Exact same formula as skills carousel
-  const getCardWidth = () => cards[0] ? cards[0].offsetWidth + 28 : 328;
-  const getOffset    = i => {
-    const ow = outer.offsetWidth;
-    const cw = cards[0] ? cards[0].offsetWidth : 300;
-    return Math.round((ow - cw) / 2) - i * (cw + 28);
+  const getGap = () => parseInt(getComputedStyle(track).gap) || 28;
+  const getOffset = i => {
+    const ow  = outer.offsetWidth;
+    const cw  = cards[0] ? cards[0].offsetWidth : 300;
+    const gap = getGap();
+    return Math.round((ow - cw) / 2) - i * (cw + gap);
   };
 
   function apply3D() {
