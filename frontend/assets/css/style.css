@@ -3321,28 +3321,69 @@ html { scroll-padding-top: 80px; }
 /* ============================================================
    PRICING CAROUSEL — mobile fix
    ============================================================ */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .pc-carousel-outer {
-    padding: 40px 0 70px;
+    padding: 30px 0 60px;
     overflow: hidden;
   }
   .pc-card {
-    width: calc(100vw - 80px);
+    width: calc(100vw - 60px);
     min-height: auto;
-    padding: 1.5rem 1.25rem;
+    padding: 1.75rem 1.25rem 1.5rem;
+    border-radius: 16px;
   }
-  .pc-amt  { font-size: 1.6rem; }
-  .pc-card-features li { font-size: .8rem; }
-  .pc-choose-btn { font-size: .85rem; padding: .7rem 1rem; }
+  .pc-card-bg-icon { font-size: 6rem; }
+  .pc-card-icon { font-size: 1.75rem; }
+  .pc-card-title { font-size: 1.2rem; }
+  .pc-amt { font-size: 1.75rem; }
+  .pc-rng { font-size: .8rem; }
+  .pc-card-features { gap: .45rem; margin-bottom: 1.25rem; }
+  .pc-card-features li { font-size: .82rem; }
+  .pc-choose-btn { font-size: .85rem; padding: .75rem 1rem; }
+  .pc-wa-icon { width: 40px; height: 40px; font-size: 1.1rem; }
+  .pc-popular-tag { font-size: .62rem; padding: .28rem .7rem; }
 
-  /* Hide arrows on mobile — use swipe instead */
+  /* Hide arrows on mobile — swipe instead */
   .pc-arrow { display: none !important; }
+}
 
-  .pc-popular-tag { font-size: .6rem; padding: .25rem .6rem; }
+@media (max-width: 400px) {
+  .pc-card { width: calc(100vw - 40px); padding: 1.5rem 1rem; }
+  .pc-amt { font-size: 1.5rem; }
+  .pc-card-features li { font-size: .78rem; }
 }
 
 /* Hide skill carousel arrows on mobile too */
 @media (max-width: 600px) {
   .sk-arrow { display: none !important; }
   .sk-carousel-outer { overflow: hidden; }
+}
+
+/* ============================================================
+   INP FIX — faster interaction response
+   ============================================================ */
+.pc-card,
+.sk-card,
+.btn,
+.pc-choose-btn,
+.pc-wa-icon,
+.nav-cta,
+.pc-arrow,
+.sk-arrow {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent layout recalc on feature list hover */
+.pc-card-features li,
+.pc-features li {
+  will-change: auto;
+  contain: layout style;
+}
+
+/* Reduce paint on carousel track during drag */
+.pc-carousel-track,
+.sk-carousel-track {
+  will-change: transform;
+  contain: layout style paint;
 }
