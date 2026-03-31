@@ -3322,49 +3322,44 @@ html { scroll-padding-top: 80px; }
    PRICING CAROUSEL — mobile fix
    ============================================================ */
 @media (max-width: 768px) {
+  /* Completely disable carousel on mobile — show as simple stacked cards */
   .pc-carousel-outer {
-    padding: 30px 0 60px;
-    overflow: hidden;
-    perspective: none;
+    overflow: visible !important;
+    padding: 0 16px 40px !important;
+    perspective: none !important;
   }
   .pc-carousel-track {
-    transform-style: flat;
-    gap: 16px;
+    display: flex !important;
+    flex-direction: column !important;
+    transform: none !important;
+    gap: 16px !important;
+    cursor: default !important;
+    transform-style: flat !important;
+    transition: none !important;
   }
   .pc-card {
-    width: calc(100vw - 48px);
-    min-height: auto;
-    padding: 1.75rem 1.25rem 1.5rem;
-    border-radius: 16px;
-    /* Disable 3D tilt on mobile — show flat */
-    transform: scale(0.92) !important;
-    opacity: 0.5 !important;
+    width: 100% !important;
+    transform: none !important;
+    opacity: 1 !important;
+    position: relative !important;
+    min-height: auto !important;
+    padding: 1.5rem 1.25rem !important;
+    border-radius: 16px !important;
   }
-  .pc-card.active {
-    transform: scale(1) !important;
+  .pc-card.active,
+  .pc-card.adjacent {
+    transform: none !important;
     opacity: 1 !important;
   }
-  .pc-card.adjacent {
-    transform: scale(0.88) !important;
-    opacity: 0.4 !important;
+  .pc-card.popular {
+    order: -1; /* Show popular first on mobile */
   }
-  .pc-card-bg-icon { font-size: 6rem; }
-  .pc-card-icon { font-size: 1.75rem; }
-  .pc-card-title { font-size: 1.2rem; }
-  .pc-amt { font-size: 1.75rem; }
-  .pc-rng { font-size: .8rem; }
-  .pc-card-features { gap: .45rem; margin-bottom: 1.25rem; }
-  .pc-card-features li { font-size: .82rem; }
-  .pc-choose-btn { font-size: .85rem; padding: .75rem 1rem; }
-  .pc-wa-icon { width: 40px; height: 40px; font-size: 1.1rem; }
-  .pc-popular-tag { font-size: .62rem; padding: .28rem .7rem; }
   .pc-arrow { display: none !important; }
-}
+  .pc-dots  { display: none !important; }
 
-@media (max-width: 400px) {
-  .pc-card { width: calc(100vw - 32px); padding: 1.5rem 1rem; }
-  .pc-amt { font-size: 1.5rem; }
-  .pc-card-features li { font-size: .78rem; }
+  .pc-amt { font-size: 1.6rem; }
+  .pc-card-features li { font-size: .85rem; }
+  .pc-popular-tag { font-size: .65rem; }
 }
 
 /* Hide skill carousel arrows on mobile too */

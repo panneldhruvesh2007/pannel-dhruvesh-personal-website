@@ -28,24 +28,24 @@
       <form class="contact-form glass-form" id="contactForm" data-aos="fade-left">
         <div class="form-row">
           <div class="fg">
-            <label>Your Name <span class="req">*</span></label>
+            <label for="cf-name">Your Name <span class="req">*</span></label>
             <input type="text" name="name" id="cf-name" placeholder="e.g. Rahul Sharma" autocomplete="name" required />
             <span class="ferr"></span>
           </div>
           <div class="fg">
-            <label>Phone <span class="req">*</span></label>
+            <label for="cf-phone">Phone <span class="req">*</span></label>
             <input type="tel" name="phone" id="cf-phone" placeholder="+91 98765 43210" autocomplete="tel" required />
             <span class="ferr"></span>
           </div>
         </div>
         <div class="form-row">
           <div class="fg">
-            <label>Email <span class="opt">(optional)</span></label>
-            <input type="email" name="email" placeholder="rahul@company.com" autocomplete="email" />
+            <label for="cf-email">Email <span class="opt">(optional)</span></label>
+            <input type="email" name="email" id="cf-email" placeholder="rahul@company.com" autocomplete="email" />
             <span class="ferr"></span>
           </div>
           <div class="fg">
-            <label>Selected Plan</label>
+            <label for="cf-plan">Selected Plan</label>
             <select name="plan" id="cf-plan">
               <option value="">Select a plan...</option>
               <option>Basic Website (₹2,000 – ₹5,000)</option>
@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="fg">
-          <label>Project Details</label>
+          <label for="cf-message">Project Details</label>
           <textarea name="message" id="cf-message" rows="5" placeholder="Tell me about your project — what kind of website, features you need, deadline, etc." required></textarea>
           <span class="ferr"></span>
         </div>
