@@ -3319,34 +3319,22 @@ html { scroll-padding-top: 80px; }
 }
 
 /* ============================================================
-   PRICING CAROUSEL — mobile: stack layout, desktop: carousel
+   PRICING CAROUSEL — mobile: same carousel as desktop
    ============================================================ */
 @media (max-width: 768px) {
   .pc-carousel-outer {
-    overflow: visible !important;
-    padding: 0 16px 40px !important;
-    perspective: none !important;
-  }
-  .pc-carousel-track {
-    display: flex !important;
-    flex-direction: column !important;
-    transform: none !important;
-    gap: 16px !important;
-    cursor: default !important;
-    transform-style: flat !important;
-    transition: none !important;
+    padding: 40px 0 70px;
+    overflow: hidden;
   }
   .pc-card {
-    width: 100% !important;
-    transform: none !important;
-    opacity: 1 !important;
-    min-height: auto !important;
-    padding: 1.5rem 1.25rem !important;
+    width: 280px;
+    min-height: auto;
+    padding: 1.5rem 1.25rem;
   }
-  .pc-card.active,
-  .pc-card.adjacent { transform: none !important; opacity: 1 !important; }
-  .pc-card.popular  { order: -1; }
-  .pc-arrow, .pc-dots { display: none !important; }
+  .pc-arrow { display: none !important; }
+  .pc-amt   { font-size: 1.6rem; }
+  .pc-card-features li { font-size: .82rem; }
+  .pc-popular-tag { font-size: .62rem; }
 }
 
 /* Hide skill carousel arrows on mobile too */
