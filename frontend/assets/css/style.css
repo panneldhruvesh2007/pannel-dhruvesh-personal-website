@@ -3324,22 +3324,45 @@ html { scroll-padding-top: 80px; }
 }
 
 /* ============================================================
-   PRICING CAROUSEL — mobile fix
+   PRICING CAROUSEL — mobile: grid layout, no carousel
    ============================================================ */
 @media (max-width: 768px) {
   .pc-carousel-outer {
-    padding: 40px 0 70px;
-    overflow: hidden;
+    overflow: visible !important;
+    padding: 20px 0 50px !important;
+    perspective: none !important;
+  }
+  .pc-carousel-track {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    transform: none !important;
+    transition: none !important;
+    gap: 16px !important;
+    padding: 0 16px !important;
+    cursor: default !important;
   }
   .pc-card {
-    width: 260px;
-    min-height: auto;
-    padding: 1.5rem 1.25rem;
+    width: 100% !important;
+    transform: none !important;
+    opacity: 1 !important;
+    min-height: auto !important;
+    padding: 1.5rem 1.25rem !important;
+    border-radius: 16px !important;
   }
-  .pc-arrow { display: none !important; }
-  .pc-amt   { font-size: 1.5rem; }
-  .pc-card-features li { font-size: .8rem; }
-  .pc-popular-tag { font-size: .6rem; }
+  .pc-card.active,
+  .pc-card.adjacent {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .pc-card.popular {
+    border-color: rgba(124,58,237,0.5) !important;
+    box-shadow: 0 0 30px rgba(124,58,237,0.2), 0 4px 24px rgba(0,0,0,0.5) !important;
+    order: -1;
+  }
+  .pc-arrow, .pc-dots { display: none !important; }
+  .pc-amt { font-size: 1.6rem; }
+  .pc-card-features li { font-size: .83rem; }
+  .pc-popular-tag { font-size: .65rem; }
 }
 
 /* Hide skill carousel arrows on mobile too */
