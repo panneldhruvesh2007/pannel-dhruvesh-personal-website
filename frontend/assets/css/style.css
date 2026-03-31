@@ -3263,9 +3263,14 @@ html { scroll-padding-top: 80px; }
 /* ============================================================
    PERFORMANCE — content-visibility for below-fold sections
    ============================================================ */
-.skills, .projects, .pricing, .extras, .contact, .footer {
+.skills, .projects, .extras, .contact, .footer {
   content-visibility: auto;
   contain-intrinsic-size: 0 600px;
+}
+/* Pricing carousel needs to be visible for JS offset calc */
+.pricing {
+  position: relative;
+  z-index: 1;
 }
 
 /* Fix INP — Enter button should respond instantly */
@@ -3319,7 +3324,7 @@ html { scroll-padding-top: 80px; }
 }
 
 /* ============================================================
-   PRICING CAROUSEL — mobile: same carousel as desktop
+   PRICING CAROUSEL — mobile fix
    ============================================================ */
 @media (max-width: 768px) {
   .pc-carousel-outer {
@@ -3327,14 +3332,14 @@ html { scroll-padding-top: 80px; }
     overflow: hidden;
   }
   .pc-card {
-    width: 280px;
+    width: 260px;
     min-height: auto;
     padding: 1.5rem 1.25rem;
   }
   .pc-arrow { display: none !important; }
-  .pc-amt   { font-size: 1.6rem; }
-  .pc-card-features li { font-size: .82rem; }
-  .pc-popular-tag { font-size: .62rem; }
+  .pc-amt   { font-size: 1.5rem; }
+  .pc-card-features li { font-size: .8rem; }
+  .pc-popular-tag { font-size: .6rem; }
 }
 
 /* Hide skill carousel arrows on mobile too */
