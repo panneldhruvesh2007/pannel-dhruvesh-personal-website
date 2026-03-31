@@ -1,4 +1,4 @@
-// ── PRICING CAROUSEL — same as skills ─────────────────────
+// ── PRICING 3D CAROUSEL — mirrors skills carousel ─────────
 export function initPricingCarousel() {
   const outer   = document.querySelector('.pc-carousel-outer');
   const track   = document.getElementById('pcTrack');
@@ -9,17 +9,19 @@ export function initPricingCarousel() {
 
   const cards = Array.from(track.querySelectorAll('.pc-card'));
   const total = cards.length;
-  let current = 1, isDragging = false, startX = 0, startTranslate = 0, currentTranslate = 0;
+  let current = 1; // start on Standard (Most Popular)
+  let isDragging = false, startX = 0, startTranslate = 0, currentTranslate = 0;
 
+  // Build dots
   cards.forEach((_, i) => {
     const d = document.createElement('div');
-    d.className = 'pc-dot' + (i === 1 ? ' active' : '');
+    d.className = 'pc-dot' + (i === current ? ' active' : '');
     d.addEventListener('click', () => goTo(i));
     dotsEl.appendChild(d);
   });
 
-  const getCardWidth  = () => cards[0] ? cards[0].offsetWidth + 28 : 328;
-  const getOffset     = i => (outer.offsetWidth / 2) - (getCardWidth() * i) - (cards[0].offsetWidth / 2);
+  const getCardWidth = () => cards[0] ? cards[0].offsetWidth + 28 : 348;
+  const getOffset   = i => (outer.offsetWidth / 2) - (getCardWidth() * i) - (cards[0].offsetWidth / 2);
 
   function apply3D() {
     cards.forEach((c, i) => {
@@ -51,20 +53,11 @@ export function initPricingCarousel() {
   }
 
   goTo(current);
-  window.addEventListener('load',   () => goTo(current));
   window.addEventListener('resize', () => goTo(current));
-  btnPrev && btnPrev.addEventListener('click', () => goTo(current - 1));
-  btnNext && btnNext.addEventListener('click', () => goTo(current + 1));
+  btnPrev.addEventListener('click', () => goTo(current - 1));
+  btnNext.addEventListener('click', () => goTo(current + 1));
 
-  document.addEventListener('keydown', e => {
-    const section = document.getElementById('pricing');
-    if (!section) return;
-    const rect = section.getBoundingClientRect();
-    if (rect.top > window.innerHeight || rect.bottom < 0) return;
-    if (e.key === 'ArrowLeft')  goTo(current - 1);
-    if (e.key === 'ArrowRight') goTo(current + 1);
-  });
-
+  // Drag
   const dragStart = x => { isDragging = true; startX = x; startTranslate = currentTranslate; track.classList.add('dragging'); };
   const dragMove  = x => {
     if (!isDragging) return;

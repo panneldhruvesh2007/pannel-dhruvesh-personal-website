@@ -3263,14 +3263,9 @@ html { scroll-padding-top: 80px; }
 /* ============================================================
    PERFORMANCE — content-visibility for below-fold sections
    ============================================================ */
-.skills, .projects, .extras, .contact, .footer {
+.skills, .projects, .pricing, .extras, .contact, .footer {
   content-visibility: auto;
   contain-intrinsic-size: 0 600px;
-}
-/* Pricing carousel needs to be visible for JS offset calc */
-.pricing {
-  position: relative;
-  z-index: 1;
 }
 
 /* Fix INP — Enter button should respond instantly */
@@ -3324,62 +3319,25 @@ html { scroll-padding-top: 80px; }
 }
 
 /* ============================================================
-   MOBILE CAROUSEL — skills & pricing same behavior
+   PRICING CAROUSEL — mobile fix
    ============================================================ */
-@media (max-width: 768px) {
-  .sk-arrow { display: none; }
-  .pc-arrow { display: none; }
-
-  .sk-carousel-outer,
+@media (max-width: 600px) {
   .pc-carousel-outer {
-    overflow: hidden;
-    perspective: none;
-    padding: 40px 0 72px;
-    width: 100vw !important;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    padding: 40px 0 70px;
   }
-
-  .sk-carousel-track,
-  .pc-carousel-track { transform-style: flat; gap: 12px; }
-
-  .sk-card { width: clamp(260px, 82vw, 340px); min-height: 300px; backface-visibility: visible; }
-  .pc-card { width: clamp(260px, 82vw, 340px); min-height: auto;  backface-visibility: visible; }
-}
-
-@media (max-width: 480px) {
-  .sk-card { width: clamp(240px, 86vw, 300px); min-height: 280px; padding: 1.5rem 1.25rem; }
-  .pc-card { width: clamp(240px, 86vw, 300px); padding: 1.5rem 1.25rem; }
-  .pc-amt { font-size: 1.4rem; }
+  .pc-card {
+    width: calc(100vw - 80px);
+    min-height: auto;
+    padding: 1.5rem 1.25rem;
+  }
+  .pc-amt  { font-size: 1.6rem; }
   .pc-card-features li { font-size: .8rem; }
-}
-
-/* ============================================================
-   INP FIX — faster interaction response
-   ============================================================ */
-.pc-card,
-.sk-card,
-.btn,
-.pc-choose-btn,
-.pc-wa-icon,
-.nav-cta,
-.pc-arrow,
-.sk-arrow {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Prevent layout recalc on feature list hover */
-.pc-card-features li,
-.pc-features li {
-  will-change: auto;
-  contain: layout style;
-}
-
-/* Reduce paint on carousel track during drag */
-.pc-carousel-track,
-.sk-carousel-track {
-  will-change: transform;
-  contain: layout style paint;
+  .pc-choose-btn { font-size: .85rem; padding: .7rem 1rem; }
+  .pc-arrow {
+    width: 36px; height: 36px;
+    font-size: .8rem;
+  }
+  .pc-prev { left: 4px; }
+  .pc-next { right: 4px; }
+  .pc-popular-tag { font-size: .6rem; padding: .25rem .6rem; }
 }
