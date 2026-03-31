@@ -763,13 +763,10 @@ button{font-family:inherit;}
     linear-gradient(to bottom,rgba(5,5,8,0.3) 0%,rgba(5,5,8,0.85) 100%);
 }
 .hero-content{
-  position:relative;z-index:10;
+  position:relative;z-index:3;
   padding:0 clamp(16px,4vw,28px);max-width:1240px;
   margin:0 auto;width:100%;
   padding-top:72px;
-  display:flex;flex-direction:column;
-  align-items:flex-start;
-  width:48%;
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:.6rem;
@@ -3288,51 +3285,65 @@ html { scroll-padding-top: 80px; }
 }
 
 /* ============================================================
-   HERO FIX — prevent text overlap with tech scene
+   HERO FIX — restore original name style, fix layout
    ============================================================ */
-.hero-content {
-  max-width: 48% !important;
-  padding-right: 2rem !important;
-  z-index: 10 !important;
-  position: relative !important;
+.hero-content{
+  position:relative;z-index:10;
+  padding:0 clamp(16px,4vw,28px);
+  padding-top:72px;
+  width:48%;
+  max-width:600px;
 }
 
-.tech-scene {
-  width: 50% !important;
-  z-index: 3 !important;
-  pointer-events: none !important;
+/* Restore original PANNEL / DHRUVESH big style */
+.name-thin{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4rem,10vw,9rem) !important;
+  font-weight:400;letter-spacing:8px;
+  color:rgba(248,250,252,0.55);
+  white-space:nowrap;
+}
+.name-bold{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,13vw,12rem) !important;
+  font-weight:400;letter-spacing:4px;
+  background:linear-gradient(135deg,#fff 30%,var(--p3) 70%,var(--a2) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  line-height:.9;
 }
 
-/* "BUILD YOUR WEBSITE WITH" */
-.name-thin {
-  font-size: clamp(1.2rem, 2.5vw, 2.8rem) !important;
-  letter-spacing: 3px !important;
-  line-height: 1.15 !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+.tech-scene{
+  width:52% !important;
+  z-index:3 !important;
 }
 
-/* PANNEL DHRUVESH */
-.name-bold {
-  font-size: clamp(2.8rem, 6vw, 6rem) !important;
-  line-height: 0.95 !important;
+@media(max-width:900px){
+  .hero-content{ width:100%; max-width:100%; padding-right:clamp(16px,4vw,28px); }
+  .name-thin{ font-size:clamp(3rem,8vw,6rem) !important; white-space:normal; }
+  .name-bold{ font-size:clamp(4rem,12vw,8rem) !important; }
 }
 
-/* Smooth fade-in for hero content on load */
-@keyframes heroFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 900px) {
-  .hero-content {
-    max-width: 100% !important;
-    padding-right: 0 !important;
+/* ============================================================
+   PRICING CAROUSEL — mobile fix
+   ============================================================ */
+@media (max-width: 600px) {
+  .pc-carousel-outer {
+    padding: 40px 0 70px;
   }
-  .name-thin {
-    font-size: clamp(1rem, 4vw, 1.8rem) !important;
-    white-space: normal !important;
+  .pc-card {
+    width: calc(100vw - 80px);
+    min-height: auto;
+    padding: 1.5rem 1.25rem;
   }
-  .name-bold { font-size: clamp(2.5rem, 10vw, 5rem) !important; }
+  .pc-amt  { font-size: 1.6rem; }
+  .pc-card-features li { font-size: .8rem; }
+  .pc-choose-btn { font-size: .85rem; padding: .7rem 1rem; }
+  .pc-arrow {
+    width: 36px; height: 36px;
+    font-size: .8rem;
+  }
+  .pc-prev { left: 4px; }
+  .pc-next { right: 4px; }
+  .pc-popular-tag { font-size: .6rem; padding: .25rem .6rem; }
 }
