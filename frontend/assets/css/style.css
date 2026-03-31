@@ -764,8 +764,10 @@ button{font-family:inherit;}
 }
 .hero-content{
   position:relative;z-index:3;
-  padding:0 clamp(16px,4vw,28px);max-width:1240px;
-  margin:0 auto;width:100%;
+  padding:0 clamp(16px,4vw,28px);
+  max-width:1240px;
+  margin:0 auto;
+  width:100%;
   padding-top:72px;
 }
 .hero-eyebrow{
@@ -3287,13 +3289,6 @@ html { scroll-padding-top: 80px; }
 /* ============================================================
    HERO FIX — restore original name style, fix layout
    ============================================================ */
-.hero-content{
-  position:relative;z-index:10;
-  padding:0 clamp(16px,4vw,28px);
-  padding-top:72px;
-  width:48%;
-  max-width:600px;
-}
 
 /* Restore original PANNEL / DHRUVESH big style */
 .name-thin{
@@ -3319,7 +3314,6 @@ html { scroll-padding-top: 80px; }
 }
 
 @media(max-width:900px){
-  .hero-content{ width:100%; max-width:100%; padding-right:clamp(16px,4vw,28px); }
   .name-thin{ font-size:clamp(3rem,8vw,6rem) !important; white-space:normal; }
   .name-bold{ font-size:clamp(4rem,12vw,8rem) !important; }
 }
