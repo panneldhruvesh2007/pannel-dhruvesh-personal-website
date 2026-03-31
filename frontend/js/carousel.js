@@ -20,7 +20,7 @@ export function initCarousel() {
 
   const getGap = () => parseInt(getComputedStyle(track).gap) || 28;
   const getOffset = i => {
-    const ow  = outer.offsetWidth;
+    const ow  = Math.max(outer.offsetWidth, window.innerWidth * 0.9);
     const cw  = cards[0] ? cards[0].offsetWidth : 300;
     const gap = getGap();
     return Math.round((ow - cw) / 2) - i * (cw + gap);

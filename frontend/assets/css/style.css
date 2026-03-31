@@ -3335,6 +3335,8 @@ html { scroll-padding-top: 80px; }
     overflow: hidden;
     perspective: none;
     padding: 40px 0 72px;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .sk-carousel-track,
