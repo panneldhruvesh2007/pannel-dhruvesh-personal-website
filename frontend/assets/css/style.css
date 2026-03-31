@@ -2903,3 +2903,110 @@ html { scroll-padding-top: 80px; }
 .pricing, .extras { position: relative; z-index: 1; }
 =======
 >>>>>>> 4a3b23a4d9e09bfedc9a84c8ec160adcf544c756
+
+/* ============================================================
+   PRICING EFFECTS — shimmer, glow orb, tilt, WA button
+   ============================================================ */
+
+/* Shimmer sweep on hover */
+.pc-shimmer {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s;
+  z-index: 2;
+}
+
+/* Glow orb at bottom of card */
+.pc-glow-orb {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 80px;
+  background: radial-gradient(ellipse, var(--orb, #7c3aed) 0%, transparent 70%);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity .4s;
+  filter: blur(8px);
+}
+.price-card:hover .pc-glow-orb { opacity: 0.38; }
+
+/* Smooth tilt transition on leave */
+.price-card {
+  transition: transform .4s cubic-bezier(.25,.46,.45,.94),
+              box-shadow .4s ease,
+              border-color .4s ease;
+  transform-style: preserve-3d;
+}
+
+/* Actions row — button + WA icon */
+.pc-actions {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+}
+.pc-actions .pc-btn { flex: 1; }
+
+/* WhatsApp icon button on card */
+.pc-wa-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #25d366;
+  color: #fff;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  transition: all .3s ease;
+  box-shadow: 0 4px 14px rgba(37,211,102,0.4);
+  position: relative;
+  z-index: 3;
+}
+.pc-wa-btn:hover {
+  background: #1ebe5d;
+  transform: scale(1.12);
+  box-shadow: 0 6px 20px rgba(37,211,102,0.65);
+}
+.pc-wa-btn.popular-wa {
+  animation: waPulseCard 2s ease-in-out infinite;
+}
+@keyframes waPulseCard {
+  0%,100% { box-shadow: 0 4px 14px rgba(37,211,102,0.4); }
+  50%      { box-shadow: 0 4px 14px rgba(37,211,102,0.4), 0 0 0 6px rgba(37,211,102,0.12); }
+}
+
+/* Popular card extra glow border animation */
+.price-card.popular {
+  animation: popularGlow 3s ease-in-out infinite;
+}
+@keyframes popularGlow {
+  0%,100% { box-shadow: 0 0 40px rgba(124,58,237,0.2), 0 8px 40px rgba(0,0,0,0.5); }
+  50%      { box-shadow: 0 0 60px rgba(124,58,237,0.4), 0 8px 40px rgba(0,0,0,0.5); }
+}
+.price-card.popular:hover { animation: none; }
+
+/* Feature list item stagger animation on card hover */
+.price-card:hover .pc-features li {
+  animation: featureSlide .3s ease forwards;
+}
+.pc-features li:nth-child(1) { animation-delay: .02s; }
+.pc-features li:nth-child(2) { animation-delay: .04s; }
+.pc-features li:nth-child(3) { animation-delay: .06s; }
+.pc-features li:nth-child(4) { animation-delay: .08s; }
+.pc-features li:nth-child(5) { animation-delay: .10s; }
+.pc-features li:nth-child(6) { animation-delay: .12s; }
+.pc-features li:nth-child(7) { animation-delay: .14s; }
+@keyframes featureSlide {
+  from { transform: translateX(-4px); opacity: .7; }
+  to   { transform: translateX(0);    opacity: 1;  }
+}
