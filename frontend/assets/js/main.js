@@ -14,8 +14,11 @@ const SECTIONS = [
   { id: 'about-slot',    file: 'sections/about.html'     },
   { id: 'skills-slot',   file: 'sections/skills.html'    },
   { id: 'projects-slot', file: 'sections/projects.html'  },
+<<<<<<< HEAD
   { id: 'pricing-slot',  file: 'sections/pricing.html'   },
   { id: 'extras-slot',   file: 'sections/extras.html'    },
+=======
+>>>>>>> 4a3b23a4d9e09bfedc9a84c8ec160adcf544c756
   { id: 'contact-slot',  file: 'sections/contact.html'   },
   { id: 'footer-slot',   file: 'components/footer.html'  },
 ];

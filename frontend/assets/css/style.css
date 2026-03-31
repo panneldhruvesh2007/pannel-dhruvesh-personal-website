@@ -2469,6 +2469,7 @@ html { scroll-padding-top: 80px; }
   0%,100% { opacity: 0.5; }
   50%      { opacity: 1; color: var(--a2); }
 }
+<<<<<<< HEAD
 
 
 /* ============================================================
@@ -2900,3 +2901,5 @@ html { scroll-padding-top: 80px; }
 
 /* Ensure new sections have z-index */
 .pricing, .extras { position: relative; z-index: 1; }
+=======
+>>>>>>> 4a3b23a4d9e09bfedc9a84c8ec160adcf544c756

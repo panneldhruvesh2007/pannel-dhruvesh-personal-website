@@ -12,3 +12,10 @@ venv/
 
 # Node
 node_modules/
+<<<<<<< HEAD
+=======
+
+# OS
+.DS_Store
+Thumbs.db
+>>>>>>> 4a3b23a4d9e09bfedc9a84c8ec160adcf544c756
