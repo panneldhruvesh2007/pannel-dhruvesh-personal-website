@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pannel Dhruvesh — Resume</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #d6d6d6;
+    color: #1a1a1a;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 24px auto;
+    background: #fff;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+    display: grid;
+    grid-template-columns: 68mm 1fr;
+  }
+
+  /* ── LEFT SIDEBAR ── */
+  .sidebar {
+    background: #1a2744;
+    color: #e8edf5;
+    padding: 32px 20px 28px;
+  }
+  .sidebar h1 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .sidebar .role {
+    font-size: 10.5px;
+    color: #7eb8d4;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+  .sb-section { margin-bottom: 20px; }
+  .sb-title {
+    font-size: 9.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #7eb8d4;
+    border-bottom: 1px solid rgba(126,184,212,0.3);
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+  }
+  .sb-item {
+    font-size: 11.5px;
+    color: #c8d8e8;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+  }
+  .sb-item .icon { color: #7eb8d4; font-size: 12px; margin-top: 1px; flex-shrink: 0; width: 14px; text-align: center; }
+  .sb-item a { color: #7eb8d4; text-decoration: none; word-break: break-all; font-size: 11px; }
+
+  /* skills bar */
+  .skill-bar-wrap { margin-bottom: 8px; }
+  .skill-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    color: #c8d8e8;
+    margin-bottom: 3px;
+  }
+  .skill-bar-label span { color: #7eb8d4; font-size: 10.5px; }
+  .skill-bar-bg { background: rgba(255,255,255,0.1); border-radius: 3px; height: 4px; }
+  .skill-bar-fill { background: linear-gradient(90deg, #7eb8d4, #4a9bbe); border-radius: 3px; height: 4px; }
+
+  .lang-item { font-size: 11.5px; color: #c8d8e8; margin-bottom: 5px; }
+  .lang-level { font-size: 10px; color: #7eb8d4; }
+
+  /* ── RIGHT MAIN ── */
+  .main { padding: 32px 28px 28px; }
+
+  .section { margin-bottom: 16px; }
+  .sec-title {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a2744;
+    border-bottom: 2px solid #1a2744;
+    padding-bottom: 3px;
+    margin-bottom: 10px;
+  }
+  .sec-title span { color: #2a7fa8; }
+
+  /* summary */
+  .summary p { font-size: 12px; color: #444; line-height: 1.6; }
+
+  /* education */
+  .edu-entry { margin-bottom: 9px; }
+  .edu-header { display: flex; justify-content: space-between; align-items: baseline; }
+  .edu-deg { font-weight: 700; font-size: 12.5px; color: #1a2744; }
+  .edu-date { font-size: 11px; color: #888; white-space: nowrap; }
+  .edu-school { font-size: 11.5px; color: #2a7fa8; }
+  .edu-detail { font-size: 11.5px; color: #666; }
+
+  /* projects */
+  .proj-entry { margin-bottom: 11px; }
+  .proj-header { display: flex; justify-content: space-between; align-items: baseline; }
+  .proj-title { font-weight: 700; font-size: 12.5px; color: #1a2744; }
+  .proj-date { font-size: 11px; color: #888; white-space: nowrap; }
+  .proj-stack { font-size: 11px; color: #2a7fa8; margin-bottom: 3px; font-style: italic; }
+  .proj-entry ul { padding-left: 14px; }
+  .proj-entry ul li { font-size: 12px; color: #444; margin-bottom: 2px; }
+
+  /* tags */
+  .tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 5px; }
+  .tag {
+    background: #eaf4f9;
+    color: #1a2744;
+    border: 1px solid #b8d8e8;
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-size: 10.5px;
+    font-weight: 600;
+  }
+
+  /* cert */
+  .cert-item { font-size: 12px; color: #444; margin-bottom: 4px; padding-left: 12px; position: relative; }
+  .cert-item::before { content: "▸"; position: absolute; left: 0; color: #2a7fa8; }
+
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+    @page { margin: 0; size: A4; }
+    .sidebar {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      background: #1a2744 !important;
+      color: #e8edf5 !important;
+    }
+    .skill-bar-bg {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      background: rgba(255,255,255,0.1) !important;
+    }
+    .skill-bar-fill {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      background: linear-gradient(90deg, #7eb8d4, #4a9bbe) !important;
+    }
+    .tag {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      background: #eaf4f9 !important;
+      border: 1px solid #b8d8e8 !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h1>PANNEL<br>DHRUVESH</h1>
+    <div class="role">Data Science Student · Web Developer</div>
+
+    <div class="sb-section">
+      <div class="sb-title">Contact</div>
+      <div class="sb-item"><span class="icon"><i class="fa-solid fa-location-dot"></i></span> Ahmedabad, Gujarat, India</div>
+      <div class="sb-item"><span class="icon"><i class="fa-solid fa-phone"></i></span> +91 96243 93563</div>
+      <div class="sb-item"><span class="icon"><i class="fa-solid fa-envelope"></i></span> <a href="mailto:panneldhruvesh2007@gmail.com">panneldhruvesh2007@gmail.com</a></div>
+      <div class="sb-item"><span class="icon"><i class="fa-solid fa-globe"></i></span> <a href="https://pannel-dhruvesh-personal-website.vercel.app">Portfolio Website</a></div>
+      <div class="sb-item"><span class="icon"><i class="fa-brands fa-github"></i></span> <a href="https://github.com/panneldhruvesh2007">github.com/panneldhruvesh2007</a></div>
+      <div class="sb-item"><span class="icon"><i class="fa-brands fa-linkedin"></i></span> <a href="https://www.linkedin.com/in/dhruvesh-pannel-58940b366">LinkedIn Profile</a></div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">Technical Skills</div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label">Python <span>Beginner</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:45%"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label">MySQL / SQL <span>Beginner</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:45%"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label">Java <span>Beginner</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:35%"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label">HTML / CSS <span>Intermediate</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:65%"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label">JavaScript <span>Basic</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:35%"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label">FastAPI / REST API <span>Basic</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:40%"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label">Git / GitHub <span>Basic</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:40%"></div></div>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">Languages</div>
+      <div class="lang-item">Hindi <div class="lang-level">Native</div></div>
+      <div class="lang-item">English <div class="lang-level">Professional Working Proficiency</div></div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">Tools & Platforms</div>
+      <div class="sb-item">VS Code, Git, GitHub</div>
+      <div class="sb-item">Vercel, Render, Supabase</div>
+      <div class="sb-item">MS Excel, MS Word, PowerPoint</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <div class="section">
+      <div class="sec-title">Professional <span>Summary</span></div>
+      <p>Motivated 1st-year B.Sc. Data Science student at JG University with hands-on experience building real-world software. Developed a fully deployed full-stack portfolio website with FastAPI backend, Supabase database, and live production hosting. Built a Gym Management System using Python and MySQL. Eager to apply programming, database, and analytical skills in a professional environment and grow through practical exposure.</p>
+    </div>
+
+    <div class="section">
+      <div class="sec-title">Education</div>
+      <div class="edu-entry">
+        <div class="edu-header">
+          <div class="edu-deg">B.Sc. Data Science</div>
+          <div class="edu-date">2025 — Present</div>
+        </div>
+        <div class="edu-school">JG University, Ahmedabad, Gujarat</div>
+        <div class="edu-detail">1st Year · Coursework: Python, Statistics, DBMS, Web Technologies</div>
+      </div>
+      <div class="edu-entry">
+        <div class="edu-header">
+          <div class="edu-deg">Higher Secondary Certificate (12th)</div>
+          <div class="edu-date">Passed 2025</div>
+        </div>
+        <div class="edu-school">Gujarat State Board</div>
+        <div class="edu-detail">Aggregate: 60%</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-title">Projects</div>
+
+      <div class="proj-entry">
+        <div class="proj-header">
+          <div class="proj-title">Personal Portfolio Website</div>
+          <div class="proj-date">Mar 2026 · Live</div>
+        </div>
+        <div class="proj-stack">HTML · CSS · JavaScript · FastAPI · Supabase · Vercel · Render</div>
+        <ul>
+          <li>Designed and deployed a full-stack portfolio from scratch with 3D animations and glassmorphism UI</li>
+          <li>Built FastAPI backend on Render with Supabase (PostgreSQL) for contact form data storage</li>
+          <li>Implemented security features: CORS, rate limiting, input validation, and HTTP security headers</li>
+        </ul>
+        <div class="tags"><span class="tag">FastAPI</span><span class="tag">Supabase</span><span class="tag">REST API</span><span class="tag">Vercel</span><span class="tag">EmailJS</span></div>
+      </div>
+
+      <div class="proj-entry">
+        <div class="proj-header">
+          <div class="proj-title">Gym Management & Billing Software</div>
+          <div class="proj-date">2025</div>
+        </div>
+        <div class="proj-stack">Python · MySQL · Tkinter</div>
+        <ul>
+          <li>Developed a desktop application to manage gym member records, track attendance, and automate billing</li>
+          <li>Designed MySQL relational database backend with Python scripts for payment tracking and report generation</li>
+        </ul>
+        <div class="tags"><span class="tag">Python</span><span class="tag">MySQL</span><span class="tag">Tkinter</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-title">Certifications</div>
+      <div class="cert-item">Certificate of Participation — AI MAESTROS, JG TESHSTORM 2026 &nbsp;·&nbsp; School of Science &amp; Technology, JG University &nbsp;·&nbsp; Feb 2026</div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /page -->
+</body>
+</html>

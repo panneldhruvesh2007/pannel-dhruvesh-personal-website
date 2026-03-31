@@ -1,0 +1,383 @@
+[
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Request",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Request",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Limiter",
+        "importPath": "slowapi",
+        "description": "slowapi",
+        "isExtraImport": true,
+        "detail": "slowapi",
+        "documentation": {}
+    },
+    {
+        "label": "Limiter",
+        "importPath": "slowapi",
+        "description": "slowapi",
+        "isExtraImport": true,
+        "detail": "slowapi",
+        "documentation": {}
+    },
+    {
+        "label": "_rate_limit_exceeded_handler",
+        "importPath": "slowapi",
+        "description": "slowapi",
+        "isExtraImport": true,
+        "detail": "slowapi",
+        "documentation": {}
+    },
+    {
+        "label": "get_remote_address",
+        "importPath": "slowapi.util",
+        "description": "slowapi.util",
+        "isExtraImport": true,
+        "detail": "slowapi.util",
+        "documentation": {}
+    },
+    {
+        "label": "get_remote_address",
+        "importPath": "slowapi.util",
+        "description": "slowapi.util",
+        "isExtraImport": true,
+        "detail": "slowapi.util",
+        "documentation": {}
+    },
+    {
+        "label": "ValidationError",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "EmailStr",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "field_validator",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "smtplib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "smtplib",
+        "description": "smtplib",
+        "detail": "smtplib",
+        "documentation": {}
+    },
+    {
+        "label": "MIMEText",
+        "importPath": "email.mime.text",
+        "description": "email.mime.text",
+        "isExtraImport": true,
+        "detail": "email.mime.text",
+        "documentation": {}
+    },
+    {
+        "label": "MIMEMultipart",
+        "importPath": "email.mime.multipart",
+        "description": "email.mime.multipart",
+        "isExtraImport": true,
+        "detail": "email.mime.multipart",
+        "documentation": {}
+    },
+    {
+        "label": "html",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "html",
+        "description": "html",
+        "detail": "html",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "create_client",
+        "importPath": "supabase",
+        "description": "supabase",
+        "isExtraImport": true,
+        "detail": "supabase",
+        "documentation": {}
+    },
+    {
+        "label": "Client",
+        "importPath": "supabase",
+        "description": "supabase",
+        "isExtraImport": true,
+        "detail": "supabase",
+        "documentation": {}
+    },
+    {
+        "label": "asynccontextmanager",
+        "importPath": "contextlib",
+        "description": "contextlib",
+        "isExtraImport": true,
+        "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
+        "label": "JSONResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "RateLimitExceeded",
+        "importPath": "slowapi.errors",
+        "description": "slowapi.errors",
+        "isExtraImport": true,
+        "detail": "slowapi.errors",
+        "documentation": {}
+    },
+    {
+        "label": "uvicorn",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uvicorn",
+        "description": "uvicorn",
+        "detail": "uvicorn",
+        "documentation": {}
+    },
+    {
+        "label": "limiter",
+        "kind": 5,
+        "importPath": "backend.app.routes.contact_route",
+        "description": "backend.app.routes.contact_route",
+        "peekOfCode": "limiter = Limiter(key_func=get_remote_address)\n@router.post(\"/contact\")\n@limiter.limit(\"5/minute\")\nasync def submit_contact(request: Request, form: ContactSchema):\n    logger.info(f\"POST /contact — from={form.email}, purpose={form.purpose}\")\n    # ── Step 1: Save to Supabase ──────────────────────────\n    try:\n        await save_contact(form)\n    except RuntimeError as e:\n        # Config error (missing env vars) — 503 so it's clear it's a server config issue",
+        "detail": "backend.app.routes.contact_route",
+        "documentation": {}
+    },
+    {
+        "label": "ContactSchema",
+        "kind": 6,
+        "importPath": "backend.app.schemas.contact_schema",
+        "description": "backend.app.schemas.contact_schema",
+        "peekOfCode": "class ContactSchema(BaseModel):\n    name:    str\n    email:   EmailStr\n    phone:   str\n    purpose: str\n    message: str\n    @field_validator(\"name\")\n    @classmethod\n    def name_valid(cls, v: str) -> str:\n        v = v.strip()",
+        "detail": "backend.app.schemas.contact_schema",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_PURPOSES",
+        "kind": 5,
+        "importPath": "backend.app.schemas.contact_schema",
+        "description": "backend.app.schemas.contact_schema",
+        "peekOfCode": "ALLOWED_PURPOSES = {\n    \"Internship Offer\", \"Freelance Project\",\n    \"Research Collaboration\", \"Job Opportunity\", \"Just Saying Hi\"\n}\nclass ContactSchema(BaseModel):\n    name:    str\n    email:   EmailStr\n    phone:   str\n    purpose: str\n    message: str",
+        "detail": "backend.app.schemas.contact_schema",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "backend.app.services.contact_service",
+        "description": "backend.app.services.contact_service",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nasync def save_contact(form: ContactSchema) -> None:\n    \"\"\"Insert sanitized form data into Supabase contacts table.\"\"\"\n    # ── Guard: check credentials are present ─────────────\n    if not settings.SUPABASE_URL or not settings.SUPABASE_KEY:\n        raise RuntimeError(\n            \"Supabase is not configured. \"\n            \"Set SUPABASE_URL and SUPABASE_KEY in your environment variables.\"\n        )\n    try:",
+        "detail": "backend.app.services.contact_service",
+        "documentation": {}
+    },
+    {
+        "label": "sanitize",
+        "kind": 2,
+        "importPath": "backend.app.utils.validator",
+        "description": "backend.app.utils.validator",
+        "peekOfCode": "def sanitize(value: str) -> str:\n    \"\"\"Strip leading/trailing whitespace and escape HTML special chars.\"\"\"\n    return html.escape(value.strip())\ndef is_valid_email(email: str) -> bool:\n    pattern = r\"^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$\"\n    return bool(re.match(pattern, email, re.IGNORECASE))\ndef is_valid_phone(phone: str) -> bool:\n    return len(re.sub(r\"\\D\", \"\", phone)) >= 10",
+        "detail": "backend.app.utils.validator",
+        "documentation": {}
+    },
+    {
+        "label": "is_valid_email",
+        "kind": 2,
+        "importPath": "backend.app.utils.validator",
+        "description": "backend.app.utils.validator",
+        "peekOfCode": "def is_valid_email(email: str) -> bool:\n    pattern = r\"^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$\"\n    return bool(re.match(pattern, email, re.IGNORECASE))\ndef is_valid_phone(phone: str) -> bool:\n    return len(re.sub(r\"\\D\", \"\", phone)) >= 10",
+        "detail": "backend.app.utils.validator",
+        "documentation": {}
+    },
+    {
+        "label": "is_valid_phone",
+        "kind": 2,
+        "importPath": "backend.app.utils.validator",
+        "description": "backend.app.utils.validator",
+        "peekOfCode": "def is_valid_phone(phone: str) -> bool:\n    return len(re.sub(r\"\\D\", \"\", phone)) >= 10",
+        "detail": "backend.app.utils.validator",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "kind": 6,
+        "importPath": "backend.app.config",
+        "description": "backend.app.config",
+        "peekOfCode": "class Settings:\n    SUPABASE_URL: str  = os.environ.get(\"SUPABASE_URL\", \"\").strip()\n    SUPABASE_KEY: str  = os.environ.get(\"SUPABASE_KEY\", \"\").strip()\n    SMTP_HOST: str     = os.environ.get(\"SMTP_HOST\", \"smtp.gmail.com\").strip()\n    SMTP_PORT: int     = int(os.environ.get(\"SMTP_PORT\", 587))\n    SMTP_USER: str     = os.environ.get(\"SMTP_USER\", \"\").strip()\n    SMTP_PASS: str     = os.environ.get(\"SMTP_PASS\", \"\").strip()\n    NOTIFY_EMAIL: str  = os.environ.get(\"NOTIFY_EMAIL\", \"\").strip()\n    ALLOWED_ORIGINS: list[str] = _parse_origins(\n        os.environ.get(",
+        "detail": "backend.app.config",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "backend.app.config",
+        "description": "backend.app.config",
+        "peekOfCode": "logger = logging.getLogger(__name__)\ndef _parse_origins(raw: str) -> list[str]:\n    \"\"\"\n    Parse a comma-separated origins string.\n    Accepts '*' as a wildcard (allow all origins).\n    Strips whitespace, drops empty strings, validates http/https prefix.\n    \"\"\"\n    raw = raw.strip()\n    # Wildcard — allow all origins (useful for early dev/testing)\n    if raw == \"*\":",
+        "detail": "backend.app.config",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "kind": 5,
+        "importPath": "backend.app.config",
+        "description": "backend.app.config",
+        "peekOfCode": "settings = Settings()",
+        "detail": "backend.app.config",
+        "documentation": {}
+    },
+    {
+        "label": "get_supabase",
+        "kind": 2,
+        "importPath": "backend.app.database",
+        "description": "backend.app.database",
+        "peekOfCode": "def get_supabase() -> Client:\n    if not settings.SUPABASE_URL or not settings.SUPABASE_KEY:\n        raise RuntimeError(\"SUPABASE_URL and SUPABASE_KEY must be set in .env\")\n    return create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)",
+        "detail": "backend.app.database",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "backend.app.main",
+        "description": "backend.app.main",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nlimiter = Limiter(key_func=get_remote_address)\n@asynccontextmanager\nasync def lifespan(app: FastAPI):\n    # Print full settings validation on every startup — visible in Render logs\n    settings.validate()\n    logger.info(\"Portfolio API started\")\n    yield\n    logger.info(\"Portfolio API stopped\")\napp = FastAPI(",
+        "detail": "backend.app.main",
+        "documentation": {}
+    },
+    {
+        "label": "limiter",
+        "kind": 5,
+        "importPath": "backend.app.main",
+        "description": "backend.app.main",
+        "peekOfCode": "limiter = Limiter(key_func=get_remote_address)\n@asynccontextmanager\nasync def lifespan(app: FastAPI):\n    # Print full settings validation on every startup — visible in Render logs\n    settings.validate()\n    logger.info(\"Portfolio API started\")\n    yield\n    logger.info(\"Portfolio API stopped\")\napp = FastAPI(\n    title=\"Pannel Dhruvesh — Portfolio API\",",
+        "detail": "backend.app.main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "backend.app.main",
+        "description": "backend.app.main",
+        "peekOfCode": "app = FastAPI(\n    title=\"Pannel Dhruvesh — Portfolio API\",\n    version=\"1.0.0\",\n    lifespan=lifespan,\n    docs_url=None,\n    redoc_url=None,\n    openapi_url=None,\n)\napp.state.limiter = limiter\napp.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)",
+        "detail": "backend.app.main",
+        "documentation": {}
+    },
+    {
+        "label": "app.state.limiter",
+        "kind": 5,
+        "importPath": "backend.app.main",
+        "description": "backend.app.main",
+        "peekOfCode": "app.state.limiter = limiter\napp.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)\n# Handle wildcard CORS correctly\n_origins     = settings.ALLOWED_ORIGINS\n_allow_all   = _origins == [\"*\"]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"] if _allow_all else _origins,\n    allow_credentials=False if _allow_all else True,\n    allow_methods=[\"GET\", \"POST\", \"OPTIONS\"],",
+        "detail": "backend.app.main",
+        "documentation": {}
+    }
+]
