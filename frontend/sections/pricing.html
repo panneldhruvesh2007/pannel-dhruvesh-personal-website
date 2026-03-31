@@ -2,79 +2,72 @@
   <div class="container">
     <div class="section-label center" data-aos="fade-up">💰 Pricing Plans</div>
     <h2 class="section-heading center" data-aos="fade-up" data-aos-delay="100">Choose Your <span class="grad-text">Perfect Plan</span></h2>
-    <p class="pricing-sub center" data-aos="fade-up" data-aos-delay="150">Transparent pricing. No hidden fees. Click a plan to get started instantly.</p>
+    <p class="pricing-sub center" data-aos="fade-up" data-aos-delay="150">Drag or use arrows — click a plan to contact instantly on WhatsApp</p>
+  </div>
 
-    <div class="pricing-grid" id="pricingGrid">
+  <div class="pc-carousel-outer" data-aos="fade-up" data-aos-delay="200">
+    <div class="pc-carousel-track" id="pcTrack">
 
       <!-- BASIC -->
-      <div class="price-card" data-plan="Basic Website (₹2,000 – ₹5,000)" data-aos="fade-up" data-aos-delay="0">
-        <div class="pc-shimmer"></div>
-        <div class="pc-glow-orb" style="--orb:#10b981"></div>
-        <div class="pc-icon" style="color:#10b981"><i class="fa-solid fa-seedling"></i></div>
-        <h3 class="pc-name">Basic</h3>
-        <div class="pc-price">
-          <span class="pc-currency">₹</span>
-          <span class="pc-amount">2,000</span>
-          <span class="pc-range">– ₹5,000</span>
+      <div class="pc-card" data-index="0" style="--gc:#10b981" data-plan="Basic Website (₹2,000 – ₹5,000)">
+        <div class="pc-card-bg-icon"><i class="fa-solid fa-seedling"></i></div>
+        <div class="pc-card-icon" style="color:#10b981"><i class="fa-solid fa-seedling"></i></div>
+        <h3 class="pc-card-title">Basic</h3>
+        <div class="pc-card-price">
+          <span class="pc-cur">₹</span><span class="pc-amt">2,000</span><span class="pc-rng">– ₹5,000</span>
         </div>
-        <ul class="pc-features">
+        <ul class="pc-card-features">
           <li><i class="fa-solid fa-check"></i> 1–3 Pages</li>
           <li><i class="fa-solid fa-check"></i> Simple Modern UI</li>
           <li><i class="fa-solid fa-check"></i> Mobile Responsive</li>
           <li><i class="fa-solid fa-check"></i> Free Hosting (limited)</li>
           <li><i class="fa-solid fa-check"></i> Contact Form</li>
-          <li class="pc-feat-off"><i class="fa-solid fa-xmark"></i> Custom Animations</li>
-          <li class="pc-feat-off"><i class="fa-solid fa-xmark"></i> API Integration</li>
+          <li class="off"><i class="fa-solid fa-xmark"></i> Custom Animations</li>
+          <li class="off"><i class="fa-solid fa-xmark"></i> API Integration</li>
         </ul>
-        <div class="pc-actions">
-          <button class="btn pc-btn" style="--bc:#10b981" onclick="selectPlan(this)">Choose Plan</button>
-          <a class="pc-wa-btn" href="https://wa.me/919624395363?text=Hi%20Dhruvesh!%20I%20want%20the%20Basic%20Website%20plan%20(%E2%82%B92%2C000%20%E2%80%93%20%E2%82%B95%2C000)" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <div class="pc-card-actions">
+          <button class="btn pc-choose-btn" style="--bc:#10b981" onclick="selectPlan(this)">Choose Plan</button>
+          <a class="pc-wa-icon" href="https://wa.me/919624395363?text=Hi%20Dhruvesh!%20I%20want%20the%20Basic%20Website%20plan%20(%E2%82%B92%2C000%20%E2%80%93%20%E2%82%B95%2C000)" target="_blank" rel="noopener" aria-label="WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
           </a>
         </div>
       </div>
 
-      <!-- STANDARD (POPULAR) -->
-      <div class="price-card popular" data-plan="Standard Website (₹6,000 – ₹12,000)" data-aos="fade-up" data-aos-delay="100">
-        <div class="pc-popular-badge"><i class="fa-solid fa-star"></i> Most Popular</div>
-        <div class="pc-shimmer"></div>
-        <div class="pc-glow-orb" style="--orb:#7c3aed"></div>
-        <div class="pc-icon" style="color:#a78bfa"><i class="fa-solid fa-rocket"></i></div>
-        <h3 class="pc-name">Standard</h3>
-        <div class="pc-price">
-          <span class="pc-currency">₹</span>
-          <span class="pc-amount">6,000</span>
-          <span class="pc-range">– ₹12,000</span>
+      <!-- STANDARD -->
+      <div class="pc-card popular" data-index="1" style="--gc:#7c3aed" data-plan="Standard Website (₹6,000 – ₹12,000)">
+        <div class="pc-popular-tag"><i class="fa-solid fa-star"></i> Most Popular</div>
+        <div class="pc-card-bg-icon"><i class="fa-solid fa-rocket"></i></div>
+        <div class="pc-card-icon" style="color:#a78bfa"><i class="fa-solid fa-rocket"></i></div>
+        <h3 class="pc-card-title">Standard</h3>
+        <div class="pc-card-price">
+          <span class="pc-cur">₹</span><span class="pc-amt">6,000</span><span class="pc-rng">– ₹12,000</span>
         </div>
-        <ul class="pc-features">
+        <ul class="pc-card-features">
           <li><i class="fa-solid fa-check"></i> 4–8 Pages</li>
           <li><i class="fa-solid fa-check"></i> Custom UI + Animations</li>
           <li><i class="fa-solid fa-check"></i> Mobile Responsive</li>
           <li><i class="fa-solid fa-check"></i> Free Hosting (6 months)</li>
           <li><i class="fa-solid fa-check"></i> Contact Form + WhatsApp</li>
           <li><i class="fa-solid fa-check"></i> SEO Basics</li>
-          <li class="pc-feat-off"><i class="fa-solid fa-xmark"></i> API Integration</li>
+          <li class="off"><i class="fa-solid fa-xmark"></i> API Integration</li>
         </ul>
-        <div class="pc-actions">
-          <button class="btn pc-btn" style="--bc:#7c3aed" onclick="selectPlan(this)">Choose Plan</button>
-          <a class="pc-wa-btn popular-wa" href="https://wa.me/919624395363?text=Hi%20Dhruvesh!%20I%20want%20the%20Standard%20Website%20plan%20(%E2%82%B96%2C000%20%E2%80%93%20%E2%82%B912%2C000)" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <div class="pc-card-actions">
+          <button class="btn pc-choose-btn" style="--bc:#7c3aed" onclick="selectPlan(this)">Choose Plan</button>
+          <a class="pc-wa-icon pulse-wa" href="https://wa.me/919624395363?text=Hi%20Dhruvesh!%20I%20want%20the%20Standard%20Website%20plan%20(%E2%82%B96%2C000%20%E2%80%93%20%E2%82%B912%2C000)" target="_blank" rel="noopener" aria-label="WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
           </a>
         </div>
       </div>
 
       <!-- ADVANCED -->
-      <div class="price-card" data-plan="Advanced Website (₹15,000 – ₹30,000)" data-aos="fade-up" data-aos-delay="200">
-        <div class="pc-shimmer"></div>
-        <div class="pc-glow-orb" style="--orb:#8b5cf6"></div>
-        <div class="pc-icon" style="color:#8b5cf6"><i class="fa-solid fa-layer-group"></i></div>
-        <h3 class="pc-name">Advanced</h3>
-        <div class="pc-price">
-          <span class="pc-currency">₹</span>
-          <span class="pc-amount">15,000</span>
-          <span class="pc-range">– ₹30,000</span>
+      <div class="pc-card" data-index="2" style="--gc:#8b5cf6" data-plan="Advanced Website (₹15,000 – ₹30,000)">
+        <div class="pc-card-bg-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <div class="pc-card-icon" style="color:#8b5cf6"><i class="fa-solid fa-layer-group"></i></div>
+        <h3 class="pc-card-title">Advanced</h3>
+        <div class="pc-card-price">
+          <span class="pc-cur">₹</span><span class="pc-amt">15,000</span><span class="pc-rng">– ₹30,000</span>
         </div>
-        <ul class="pc-features">
+        <ul class="pc-card-features">
           <li><i class="fa-solid fa-check"></i> 8+ Pages</li>
           <li><i class="fa-solid fa-check"></i> Modern UI/UX Design</li>
           <li><i class="fa-solid fa-check"></i> API Integration</li>
@@ -83,26 +76,23 @@
           <li><i class="fa-solid fa-check"></i> Full SEO Optimization</li>
           <li><i class="fa-solid fa-check"></i> 3 Months Support</li>
         </ul>
-        <div class="pc-actions">
-          <button class="btn pc-btn" style="--bc:#8b5cf6" onclick="selectPlan(this)">Choose Plan</button>
-          <a class="pc-wa-btn" href="https://wa.me/919624395363?text=Hi%20Dhruvesh!%20I%20want%20the%20Advanced%20Website%20plan%20(%E2%82%B915%2C000%20%E2%80%93%20%E2%82%B930%2C000)" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <div class="pc-card-actions">
+          <button class="btn pc-choose-btn" style="--bc:#8b5cf6" onclick="selectPlan(this)">Choose Plan</button>
+          <a class="pc-wa-icon" href="https://wa.me/919624395363?text=Hi%20Dhruvesh!%20I%20want%20the%20Advanced%20Website%20plan%20(%E2%82%B915%2C000%20%E2%80%93%20%E2%82%B930%2C000)" target="_blank" rel="noopener" aria-label="WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
           </a>
         </div>
       </div>
 
       <!-- PREMIUM -->
-      <div class="price-card" data-plan="Premium Website (₹30,000 – ₹80,000+)" data-aos="fade-up" data-aos-delay="300">
-        <div class="pc-shimmer"></div>
-        <div class="pc-glow-orb" style="--orb:#ec4899"></div>
-        <div class="pc-icon" style="color:#ec4899"><i class="fa-solid fa-crown"></i></div>
-        <h3 class="pc-name">Premium</h3>
-        <div class="pc-price">
-          <span class="pc-currency">₹</span>
-          <span class="pc-amount">30,000</span>
-          <span class="pc-range">– ₹80,000+</span>
+      <div class="pc-card" data-index="3" style="--gc:#ec4899" data-plan="Premium Website (₹30,000 – ₹80,000+)">
+        <div class="pc-card-bg-icon"><i class="fa-solid fa-crown"></i></div>
+        <div class="pc-card-icon" style="color:#ec4899"><i class="fa-solid fa-crown"></i></div>
+        <h3 class="pc-card-title">Premium</h3>
+        <div class="pc-card-price">
+          <span class="pc-cur">₹</span><span class="pc-amt">30,000</span><span class="pc-rng">– ₹80,000+</span>
         </div>
-        <ul class="pc-features">
+        <ul class="pc-card-features">
           <li><i class="fa-solid fa-check"></i> Custom UI + 3D Elements</li>
           <li><i class="fa-solid fa-check"></i> Admin Panel</li>
           <li><i class="fa-solid fa-check"></i> Full API Integration</li>
@@ -111,54 +101,17 @@
           <li><i class="fa-solid fa-check"></i> Performance Optimized</li>
           <li><i class="fa-solid fa-check"></i> Priority Support</li>
         </ul>
-        <div class="pc-actions">
-          <button class="btn pc-btn" style="--bc:#ec4899" onclick="selectPlan(this)">Choose Plan</button>
-          <a class="pc-wa-btn" href="https://wa.me/919624395363?text=Hi%20Dhruvesh!%20I%20want%20the%20Premium%20Website%20plan%20(%E2%82%B930%2C000%20%E2%80%93%20%E2%82%B980%2C000%2B)" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <div class="pc-card-actions">
+          <button class="btn pc-choose-btn" style="--bc:#ec4899" onclick="selectPlan(this)">Choose Plan</button>
+          <a class="pc-wa-icon" href="https://wa.me/919624395363?text=Hi%20Dhruvesh!%20I%20want%20the%20Premium%20Website%20plan%20(%E2%82%B930%2C000%20%E2%80%93%20%E2%82%B980%2C000%2B)" target="_blank" rel="noopener" aria-label="WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
           </a>
         </div>
       </div>
 
     </div>
+    <button class="pc-arrow pc-prev" id="pcPrev" aria-label="Previous plan"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="pc-arrow pc-next" id="pcNext" aria-label="Next plan"><i class="fa-solid fa-chevron-right"></i></button>
+    <div class="pc-dots" id="pcDots"></div>
   </div>
 </section>
-
-<script>
-// ── Pricing card 3D tilt effect ──
-(function() {
-  function initPricingEffects() {
-    const cards = document.querySelectorAll('.price-card');
-    if (!cards.length) return;
-    cards.forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = e.clientX - r.left;
-        const y = e.clientY - r.top;
-        const cx = r.width  / 2;
-        const cy = r.height / 2;
-        const rotX = ((y - cy) / cy) * -8;
-        const rotY = ((x - cx) / cx) *  8;
-        card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px) scale(1.02)`;
-        // move shimmer with mouse
-        const shimmer = card.querySelector('.pc-shimmer');
-        if (shimmer) {
-          shimmer.style.left = `${(x / r.width)  * 100}%`;
-          shimmer.style.top  = `${(y / r.height) * 100}%`;
-          shimmer.style.opacity = '1';
-        }
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-        const shimmer = card.querySelector('.pc-shimmer');
-        if (shimmer) shimmer.style.opacity = '0';
-      });
-    });
-  }
-  // wait for DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPricingEffects);
-  } else {
-    setTimeout(initPricingEffects, 100);
-  }
-})();
-</script>

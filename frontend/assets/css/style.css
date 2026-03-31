@@ -3010,3 +3010,250 @@ html { scroll-padding-top: 80px; }
   from { transform: translateX(-4px); opacity: .7; }
   to   { transform: translateX(0);    opacity: 1;  }
 }
+
+/* ============================================================
+   PRICING CAROUSEL — same 3D style as skills carousel
+   ============================================================ */
+
+.pc-carousel-outer {
+  position: relative;
+  width: 100%;
+  padding: 56px 0 88px;
+  overflow: hidden;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  touch-action: pan-y;
+}
+
+.pc-carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 40px 0 20px;
+  transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+  will-change: transform;
+  cursor: grab;
+  user-select: none;
+  transform-style: preserve-3d;
+}
+.pc-carousel-track.dragging { cursor: grabbing; transition: none; }
+
+/* ── Card base — mirrors .sk-card exactly ── */
+.pc-card {
+  position: relative;
+  flex-shrink: 0;
+  width: 320px;
+  min-height: 480px;
+  padding: 2rem 1.75rem 1.75rem;
+  border-radius: 18px;
+  background: #0d0d1c;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  transform: rotateY(15deg) translateZ(-40px) scale(0.85);
+  opacity: 0.42;
+  transform-style: preserve-3d;
+  transition:
+    transform   .65s cubic-bezier(.25,.46,.45,.94),
+    opacity     .65s cubic-bezier(.25,.46,.45,.94),
+    box-shadow  .65s ease,
+    border-color .65s ease;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+/* Color tint layer */
+.pc-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: radial-gradient(ellipse 120% 80% at 50% 0%, var(--gc, #7c3aed) 0%, transparent 70%);
+  opacity: 0.08;
+  pointer-events: none;
+  transition: opacity .65s ease;
+  z-index: 0;
+}
+.pc-card > *:not(.pc-card-bg-icon) { position: relative; z-index: 1; }
+.pc-card.active::after  { opacity: 0.18; }
+
+/* Watermark bg icon */
+.pc-card-bg-icon {
+  position: absolute;
+  bottom: -10px; right: -10px;
+  font-size: 9rem;
+  color: var(--gc, #7c3aed);
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+  transition: opacity .65s ease, transform .65s ease;
+  transform: rotate(-10deg);
+}
+.pc-card.active .pc-card-bg-icon { opacity: 0.15; transform: rotate(-10deg) scale(1.08); }
+
+/* Active — front */
+.pc-card.active {
+  opacity: 1;
+  border-color: rgba(255,255,255,0.13);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 24px 64px rgba(0,0,0,0.7),
+    0 0 50px rgba(0,0,0,0.3),
+    0 2px 0 rgba(255,255,255,0.05) inset;
+}
+.pc-card.adjacent { opacity: 0.6; }
+
+/* Popular card glow border */
+.pc-card.popular.active {
+  border-color: rgba(124,58,237,0.5);
+  box-shadow:
+    0 0 0 1px rgba(124,58,237,0.3),
+    0 0 40px rgba(124,58,237,0.25),
+    0 24px 64px rgba(0,0,0,0.7);
+}
+
+/* Popular badge */
+.pc-popular-tag {
+  position: absolute;
+  top: -1px; right: 20px;
+  background: linear-gradient(135deg, var(--p), #5b21b6);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: .35rem .9rem;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 16px rgba(124,58,237,0.5);
+  z-index: 2;
+}
+
+/* Card content */
+.pc-card-icon {
+  font-size: 2.2rem;
+  margin-bottom: .75rem;
+  display: block;
+}
+.pc-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--t);
+  margin-bottom: .5rem;
+}
+.pc-card-price {
+  display: flex;
+  align-items: baseline;
+  gap: .2rem;
+  margin-bottom: 1.25rem;
+}
+.pc-cur  { font-size: 1.1rem; font-weight: 700; color: var(--gc, #a78bfa); }
+.pc-amt  { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 800; color: var(--t); }
+.pc-rng  { font-size: .85rem; color: var(--t3); }
+
+.pc-card-features {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+.pc-card-features li {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: .875rem;
+  color: var(--t2);
+}
+.pc-card-features li i.fa-check { color: var(--green); font-size: .75rem; }
+.pc-card-features li.off { color: var(--t4); }
+.pc-card-features li.off i { color: var(--t4); font-size: .75rem; }
+
+/* Actions */
+.pc-card-actions {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+}
+.pc-choose-btn {
+  flex: 1;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--bc, #7c3aed), color-mix(in srgb, var(--bc,#7c3aed) 60%, #000));
+  color: #fff;
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--bc,#7c3aed) 40%, transparent);
+}
+.pc-choose-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--bc,#7c3aed) 60%, transparent);
+}
+
+/* WhatsApp icon */
+.pc-wa-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: #25d366;
+  color: #fff;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  transition: all .3s;
+  box-shadow: 0 4px 14px rgba(37,211,102,0.4);
+  position: relative; z-index: 3;
+}
+.pc-wa-icon:hover {
+  background: #1ebe5d;
+  transform: scale(1.12);
+  box-shadow: 0 6px 22px rgba(37,211,102,0.65);
+}
+.pc-wa-icon.pulse-wa {
+  animation: pcWaPulse 2s ease-in-out infinite;
+}
+@keyframes pcWaPulse {
+  0%,100% { box-shadow: 0 4px 14px rgba(37,211,102,0.4); }
+  50%      { box-shadow: 0 4px 14px rgba(37,211,102,0.4), 0 0 0 7px rgba(37,211,102,0.12); }
+}
+
+/* Arrows — same as sk-arrow */
+.pc-arrow {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--t2);
+  font-size: .9rem;
+  cursor: pointer;
+  transition: all .3s;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+}
+.pc-arrow:hover { background: rgba(124,58,237,0.2); border-color: var(--p2); color: var(--p2); }
+.pc-prev { left: clamp(8px,2vw,24px); }
+.pc-next { right: clamp(8px,2vw,24px); }
+
+/* Dots */
+.pc-dots {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 1.5rem;
+}
+.pc-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: all .3s;
+}
+.pc-dot.active {
+  background: var(--p2);
+  width: 24px;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(167,139,250,0.6);
+}
+
+@media (max-width: 768px) {
+  .pc-card { width: 280px; min-height: 440px; }
+}

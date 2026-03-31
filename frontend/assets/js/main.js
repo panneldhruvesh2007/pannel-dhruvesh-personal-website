@@ -2,7 +2,8 @@
 import { initNavbar }    from '../../js/navbar.js';
 import { initParticles } from '../../js/particles.js';
 import { initTechScene } from '../../js/tech-scene.js';
-import { initCarousel }  from '../../js/carousel.js';
+import { initCarousel }         from '../../js/carousel.js';
+import { initPricingCarousel }  from '../../js/pricing-carousel.js';
 import { initAnimations }from '../../js/animations.js';
 import { initBackground }from '../../js/background.js';
 import { initForm }      from '../../js/form.js';
@@ -44,6 +45,7 @@ async function boot() {
   initParticles();
   initTechScene();
   initCarousel();
+  initPricingCarousel();
   initAnimations();
   initForm();
   console.log('Pannel Dhruvesh — Portfolio Loaded');
