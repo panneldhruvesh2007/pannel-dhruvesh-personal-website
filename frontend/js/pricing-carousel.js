@@ -1,16 +1,17 @@
-// ── PRICING 3D CAROUSEL — exact copy of skills carousel ───
+// ── PRICING 3D CAROUSEL ────────────────────────────────────
 export function initPricingCarousel() {
   const outer   = document.querySelector('.pc-carousel-outer');
   const track   = document.getElementById('pcTrack');
   const dotsEl  = document.getElementById('pcDots');
   const btnPrev = document.getElementById('pcPrev');
   const btnNext = document.getElementById('pcNext');
-  if (!track) return;
+  if (!track || !outer) return;
 
   const cards = Array.from(track.querySelectorAll('.pc-card'));
   const total = cards.length;
   let current = 1, isDragging = false, startX = 0, startTranslate = 0, currentTranslate = 0;
 
+  // Build dots
   cards.forEach((_, i) => {
     const d = document.createElement('div');
     d.className = 'pc-dot' + (i === 1 ? ' active' : '');
@@ -18,8 +19,14 @@ export function initPricingCarousel() {
     dotsEl.appendChild(d);
   });
 
-  const getCardWidth = () => cards[0] ? cards[0].offsetWidth + 28 : 328;
-  const getOffset    = i => (outer.offsetWidth / 2) - (getCardWidth() * i) - (cards[0].offsetWidth / 2);
+  function getCardWidth() {
+    return cards[0] ? cards[0].getBoundingClientRect().width + 28 : 308;
+  }
+  function getOffset(i) {
+    const ow = outer.getBoundingClientRect().width;
+    const cw = cards[0] ? cards[0].getBoundingClientRect().width : 280;
+    return (ow / 2) - (cw / 2) - (i * (cw + 28));
+  }
 
   function apply3D() {
     cards.forEach((c, i) => {
@@ -50,13 +57,23 @@ export function initPricingCarousel() {
     updateClasses();
   }
 
-  goTo(current);
-  window.addEventListener('resize', () => goTo(current));
-  btnPrev.addEventListener('click', () => goTo(current - 1));
-  btnNext.addEventListener('click', () => goTo(current + 1));
+  // Use IntersectionObserver so goTo runs AFTER section is visible & laid out
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      requestAnimationFrame(() => goTo(current));
+      observer.disconnect();
+    }
+  }, { threshold: 0.1 });
+  observer.observe(outer);
+
+  // Also recalc on resize
+  window.addEventListener('resize', () => requestAnimationFrame(() => goTo(current)));
+
+  btnPrev && btnPrev.addEventListener('click', () => goTo(current - 1));
+  btnNext && btnNext.addEventListener('click', () => goTo(current + 1));
 
   document.addEventListener('keydown', e => {
-    const section = track.closest('#pricing');
+    const section = document.getElementById('pricing');
     if (!section) return;
     const rect = section.getBoundingClientRect();
     if (rect.top > window.innerHeight || rect.bottom < 0) return;
@@ -81,7 +98,7 @@ export function initPricingCarousel() {
     if (!isDragging) return;
     isDragging = false;
     const delta = x - startX;
-    goTo(Math.abs(delta) > 60 ? (delta < 0 ? current + 1 : current - 1) : current);
+    goTo(Math.abs(delta) > 50 ? (delta < 0 ? current + 1 : current - 1) : current);
   };
 
   track.addEventListener('mousedown',  e => dragStart(e.clientX));
