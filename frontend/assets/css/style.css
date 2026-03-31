@@ -3283,3 +3283,39 @@ html { scroll-padding-top: 80px; }
 @font-face {
   font-display: swap;
 }
+
+/* ============================================================
+   HERO FIX — prevent text overlap with tech scene
+   ============================================================ */
+.hero-content {
+  max-width: 560px !important;
+  padding-right: 0 !important;
+}
+
+/* "BUILD YOUR WEBSITE WITH" — smaller so it fits on fewer lines */
+.name-thin {
+  font-size: clamp(1.4rem, 3.5vw, 3.8rem) !important;
+  letter-spacing: 4px !important;
+  line-height: 1.1 !important;
+}
+
+/* Keep PANNEL DHRUVESH big but not overflowing */
+.name-bold {
+  font-size: clamp(3rem, 7vw, 7rem) !important;
+  line-height: 0.95 !important;
+}
+
+/* Smooth fade-in for hero content on load */
+.hero-content {
+  animation: heroFadeIn .8s ease forwards;
+}
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .hero-content { max-width: 100% !important; }
+  .name-thin { font-size: clamp(1.1rem, 4vw, 2rem) !important; }
+  .name-bold { font-size: clamp(2.5rem, 10vw, 5rem) !important; }
+}
