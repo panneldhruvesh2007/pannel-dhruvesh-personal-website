@@ -3288,20 +3288,20 @@ html { scroll-padding-top: 80px; }
    HERO FIX — prevent text overlap with tech scene
    ============================================================ */
 .hero-content {
-  max-width: 560px !important;
+  max-width: 480px !important;
   padding-right: 0 !important;
 }
 
 /* "BUILD YOUR WEBSITE WITH" — smaller so it fits on fewer lines */
 .name-thin {
-  font-size: clamp(1.4rem, 3.5vw, 3.8rem) !important;
+  font-size: clamp(1.2rem, 2.8vw, 3rem) !important;
   letter-spacing: 4px !important;
   line-height: 1.1 !important;
 }
 
 /* Keep PANNEL DHRUVESH big but not overflowing */
 .name-bold {
-  font-size: clamp(3rem, 7vw, 7rem) !important;
+  font-size: clamp(3rem, 6.5vw, 6.5rem) !important;
   line-height: 0.95 !important;
 }
 
