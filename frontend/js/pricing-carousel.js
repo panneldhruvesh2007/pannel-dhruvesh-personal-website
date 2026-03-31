@@ -1,4 +1,4 @@
-// ── PRICING CAROUSEL — identical to skills carousel ───────
+// ── PRICING CAROUSEL — same as skills ─────────────────────
 export function initPricingCarousel() {
   const outer   = document.querySelector('.pc-carousel-outer');
   const track   = document.getElementById('pcTrack');
@@ -18,13 +18,8 @@ export function initPricingCarousel() {
     dotsEl.appendChild(d);
   });
 
-  const getGap = () => parseInt(getComputedStyle(track).gap) || 28;
-  const getOffset = i => {
-    const ow  = window.innerWidth;
-    const cw  = cards[0] ? cards[0].offsetWidth : 300;
-    const gap = getGap();
-    return Math.round((ow - cw) / 2) - i * (cw + gap);
-  };
+  const getCardWidth  = () => cards[0] ? cards[0].offsetWidth + 28 : 328;
+  const getOffset     = i => (outer.offsetWidth / 2) - (getCardWidth() * i) - (cards[0].offsetWidth / 2);
 
   function apply3D() {
     cards.forEach((c, i) => {
@@ -56,8 +51,7 @@ export function initPricingCarousel() {
   }
 
   goTo(current);
-  // Recalc after full paint in case fonts shifted layout
-  window.addEventListener('load', () => goTo(current));
+  window.addEventListener('load',   () => goTo(current));
   window.addEventListener('resize', () => goTo(current));
   btnPrev && btnPrev.addEventListener('click', () => goTo(current - 1));
   btnNext && btnNext.addEventListener('click', () => goTo(current + 1));

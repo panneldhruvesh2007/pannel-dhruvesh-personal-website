@@ -18,13 +18,8 @@ export function initCarousel() {
     dotsEl.appendChild(d);
   });
 
-  const getGap = () => parseInt(getComputedStyle(track).gap) || 28;
-  const getOffset = i => {
-    const ow  = window.innerWidth;
-    const cw  = cards[0] ? cards[0].offsetWidth : 300;
-    const gap = getGap();
-    return Math.round((ow - cw) / 2) - i * (cw + gap);
-  };
+  const getCardWidth  = () => cards[0] ? cards[0].offsetWidth + 28 : 328;
+  const getOffset     = i => (outer.offsetWidth / 2) - (getCardWidth() * i) - (cards[0].offsetWidth / 2);
 
   function apply3D() {
     cards.forEach((c, i) => {
@@ -56,7 +51,7 @@ export function initCarousel() {
   }
 
   goTo(0);
-  window.addEventListener('load', () => goTo(current));
+  window.addEventListener('load',   () => goTo(current));
   window.addEventListener('resize', () => goTo(current));
   btnPrev.addEventListener('click', () => goTo(current - 1));
   btnNext.addEventListener('click', () => goTo(current + 1));

@@ -3335,27 +3335,17 @@ html { scroll-padding-top: 80px; }
     overflow: hidden;
     perspective: none;
     padding: 40px 0 72px;
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 100vw !important;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .sk-carousel-track,
-  .pc-carousel-track {
-    transform-style: flat;
-    gap: 12px;
-  }
+  .pc-carousel-track { transform-style: flat; gap: 12px; }
 
-  .sk-card {
-    width: clamp(260px, 82vw, 340px);
-    min-height: 300px;
-    backface-visibility: visible;
-  }
-
-  .pc-card {
-    width: clamp(260px, 82vw, 340px);
-    min-height: auto;
-    backface-visibility: visible;
-  }
+  .sk-card { width: clamp(260px, 82vw, 340px); min-height: 300px; backface-visibility: visible; }
+  .pc-card { width: clamp(260px, 82vw, 340px); min-height: auto;  backface-visibility: visible; }
 }
 
 @media (max-width: 480px) {
