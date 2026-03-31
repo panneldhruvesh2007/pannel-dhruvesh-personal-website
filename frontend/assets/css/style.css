@@ -763,10 +763,13 @@ button{font-family:inherit;}
     linear-gradient(to bottom,rgba(5,5,8,0.3) 0%,rgba(5,5,8,0.85) 100%);
 }
 .hero-content{
-  position:relative;z-index:3;
+  position:relative;z-index:10;
   padding:0 clamp(16px,4vw,28px);max-width:1240px;
   margin:0 auto;width:100%;
   padding-top:72px;
+  display:flex;flex-direction:column;
+  align-items:flex-start;
+  width:48%;
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:.6rem;
@@ -3288,34 +3291,48 @@ html { scroll-padding-top: 80px; }
    HERO FIX — prevent text overlap with tech scene
    ============================================================ */
 .hero-content {
-  max-width: 480px !important;
-  padding-right: 0 !important;
+  max-width: 48% !important;
+  padding-right: 2rem !important;
+  z-index: 10 !important;
+  position: relative !important;
 }
 
-/* "BUILD YOUR WEBSITE WITH" — smaller so it fits on fewer lines */
+.tech-scene {
+  width: 50% !important;
+  z-index: 3 !important;
+  pointer-events: none !important;
+}
+
+/* "BUILD YOUR WEBSITE WITH" */
 .name-thin {
-  font-size: clamp(1.2rem, 2.8vw, 3rem) !important;
-  letter-spacing: 4px !important;
-  line-height: 1.1 !important;
+  font-size: clamp(1.2rem, 2.5vw, 2.8rem) !important;
+  letter-spacing: 3px !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
-/* Keep PANNEL DHRUVESH big but not overflowing */
+/* PANNEL DHRUVESH */
 .name-bold {
-  font-size: clamp(3rem, 6.5vw, 6.5rem) !important;
+  font-size: clamp(2.8rem, 6vw, 6rem) !important;
   line-height: 0.95 !important;
 }
 
 /* Smooth fade-in for hero content on load */
-.hero-content {
-  animation: heroFadeIn .8s ease forwards;
-}
 @keyframes heroFadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 900px) {
-  .hero-content { max-width: 100% !important; }
-  .name-thin { font-size: clamp(1.1rem, 4vw, 2rem) !important; }
+  .hero-content {
+    max-width: 100% !important;
+    padding-right: 0 !important;
+  }
+  .name-thin {
+    font-size: clamp(1rem, 4vw, 1.8rem) !important;
+    white-space: normal !important;
+  }
   .name-bold { font-size: clamp(2.5rem, 10vw, 5rem) !important; }
 }
