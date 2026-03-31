@@ -29,6 +29,17 @@
 
   <link rel="icon" type="image/jpeg" href="assets/images/profile.jpg" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- ── Inline critical CSS to eliminate render-blocking ── -->
+  <style>
+    body{margin:0;background:#050508;color:#f8fafc;font-family:'Inter','Segoe UI',sans-serif;overflow-x:hidden}
+    .intro-screen{position:fixed;inset:0;z-index:9999;background:#050508;display:flex;align-items:center;justify-content:center}
+    .is-content{position:relative;z-index:10;text-align:center}
+    .is-welcome{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,3vw,1.5rem);letter-spacing:8px;color:rgba(167,139,250,0.7);opacity:0}
+    .is-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,8vw,6rem);letter-spacing:4px;color:#f8fafc}
+    .is-enter-btn{margin-top:2rem;padding:.9rem 2.5rem;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;border:none;font-size:1rem;font-weight:600;cursor:pointer}
+    #globalBg{position:fixed;inset:0;z-index:0;pointer-events:none}
+    .navbar{position:fixed;top:0;width:100%;z-index:1000}
+  </style>
 </head>
 <body>
 

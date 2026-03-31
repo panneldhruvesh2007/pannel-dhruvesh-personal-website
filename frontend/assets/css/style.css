@@ -3257,3 +3257,29 @@ html { scroll-padding-top: 80px; }
 @media (max-width: 768px) {
   .pc-card { width: 280px; min-height: 440px; }
 }
+
+/* ============================================================
+   PERFORMANCE — content-visibility for below-fold sections
+   ============================================================ */
+.skills, .projects, .pricing, .extras, .contact, .footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+
+/* Fix INP — Enter button should respond instantly */
+#isEnterBtn {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  will-change: transform;
+}
+
+/* Reduce paint cost on carousel tracks */
+.sk-carousel-track,
+.pc-carousel-track {
+  contain: layout style;
+}
+
+/* Font display swap for custom fonts */
+@font-face {
+  font-display: swap;
+}

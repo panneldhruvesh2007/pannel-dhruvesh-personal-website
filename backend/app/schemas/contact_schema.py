@@ -1,17 +1,12 @@
-from pydantic import BaseModel, EmailStr, field_validator
-from typing import Literal
+from pydantic import BaseModel, field_validator
+from typing import Optional
 import re
-
-ALLOWED_PURPOSES = {
-    "Internship Offer", "Freelance Project",
-    "Research Collaboration", "Job Opportunity", "Just Saying Hi"
-}
 
 class ContactSchema(BaseModel):
     name:    str
-    email:   EmailStr
     phone:   str
-    purpose: str
+    email:   Optional[str] = ""
+    plan:    Optional[str] = "Not specified"
     message: str
 
     @field_validator("name")
@@ -31,13 +26,20 @@ class ContactSchema(BaseModel):
             raise ValueError("Phone too long")
         return v.strip()
 
-    @field_validator("purpose")
+    @field_validator("email")
     @classmethod
-    def purpose_valid(cls, v: str) -> str:
+    def email_valid(cls, v: str) -> str:
+        if not v:
+            return ""
         v = v.strip()
-        if v not in ALLOWED_PURPOSES:
-            raise ValueError("Invalid purpose")
+        if len(v) > 200:
+            raise ValueError("Email too long")
         return v
+
+    @field_validator("plan")
+    @classmethod
+    def plan_valid(cls, v: str) -> str:
+        return v.strip()[:100] if v else "Not specified"
 
     @field_validator("message")
     @classmethod

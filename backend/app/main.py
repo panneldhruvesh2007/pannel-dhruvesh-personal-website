@@ -17,12 +17,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-limiter = Limiter(key_func=get_remote_address)
+limiter = Limiter(key_func=get_remote_address, default_limits=["200/day", "50/hour"])
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Print full settings validation on every startup — visible in Render logs
     settings.validate()
     logger.info("Portfolio API started")
     yield
@@ -41,9 +40,18 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# Handle wildcard CORS correctly
-_origins     = settings.ALLOWED_ORIGINS
-_allow_all   = _origins == ["*"]
+# ── Global unhandled exception handler ───────────────────
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    return JSONResponse(
+        status_code=500,
+        content={"status": "error", "message": "Internal server error"},
+    )
+
+# ── CORS ──────────────────────────────────────────────────
+_origins   = settings.ALLOWED_ORIGINS
+_allow_all = _origins == ["*"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -53,25 +61,34 @@ app.add_middleware(
     allow_headers=["Content-Type", "Authorization", "Accept"],
 )
 
-# ── Security headers middleware ───────────────────────────
+# ── Security + request size middleware ───────────────────
+MAX_BODY = 64 * 1024  # 64 KB max request body
+
 @app.middleware("http")
-async def security_headers(request: Request, call_next):
+async def security_and_size(request: Request, call_next):
+    # Block oversized requests (prevents memory exhaustion)
+    content_length = request.headers.get("content-length")
+    if content_length and int(content_length) > MAX_BODY:
+        return JSONResponse(status_code=413, content={"detail": "Request too large"})
+
     response = await call_next(request)
-    response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["X-Frame-Options"] = "DENY"
-    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
-    response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
-    response.headers["X-XSS-Protection"] = "1; mode=block"
+
+    # Security headers
+    response.headers["X-Content-Type-Options"]  = "nosniff"
+    response.headers["X-Frame-Options"]          = "DENY"
+    response.headers["Referrer-Policy"]          = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"]       = "geolocation=(), microphone=(), camera=()"
+    response.headers["X-XSS-Protection"]         = "1; mode=block"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["Cache-Control"]            = "no-store"
     return response
 
 # ── Routes ────────────────────────────────────────────────
 app.include_router(contact_router)
 
-
 @app.get("/")
 async def root():
     return {"status": "ok", "message": "Portfolio API is running"}
-
 
 @app.get("/health")
 async def health():
