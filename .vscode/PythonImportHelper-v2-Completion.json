@@ -89,23 +89,7 @@
         "documentation": {}
     },
     {
-        "label": "ValidationError",
-        "importPath": "pydantic",
-        "description": "pydantic",
-        "isExtraImport": true,
-        "detail": "pydantic",
-        "documentation": {}
-    },
-    {
         "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
-        "isExtraImport": true,
-        "detail": "pydantic",
-        "documentation": {}
-    },
-    {
-        "label": "EmailStr",
         "importPath": "pydantic",
         "description": "pydantic",
         "isExtraImport": true,
@@ -121,7 +105,7 @@
         "documentation": {}
     },
     {
-        "label": "Literal",
+        "label": "Optional",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -250,7 +234,7 @@
         "kind": 5,
         "importPath": "backend.app.routes.contact_route",
         "description": "backend.app.routes.contact_route",
-        "peekOfCode": "limiter = Limiter(key_func=get_remote_address)\n@router.post(\"/contact\")\n@limiter.limit(\"5/minute\")\nasync def submit_contact(request: Request, form: ContactSchema):\n    logger.info(f\"POST /contact — from={form.email}, purpose={form.purpose}\")\n    # ── Step 1: Save to Supabase ──────────────────────────\n    try:\n        await save_contact(form)\n    except RuntimeError as e:\n        # Config error (missing env vars) — 503 so it's clear it's a server config issue",
+        "peekOfCode": "limiter = Limiter(key_func=get_remote_address)\n@router.post(\"/contact\")\n@limiter.limit(\"3/minute;10/hour;30/day\")\nasync def submit_contact(request: Request, form: ContactSchema):\n    logger.info(f\"POST /contact — name={form.name}, plan={form.plan}\")\n    try:\n        await save_contact(form)\n    except RuntimeError as e:\n        logger.error(f\"Config error: {e}\")\n        raise HTTPException(status_code=503, detail={\"status\": \"error\", \"message\": str(e)})",
         "detail": "backend.app.routes.contact_route",
         "documentation": {}
     },
@@ -259,16 +243,7 @@
         "kind": 6,
         "importPath": "backend.app.schemas.contact_schema",
         "description": "backend.app.schemas.contact_schema",
-        "peekOfCode": "class ContactSchema(BaseModel):\n    name:    str\n    email:   EmailStr\n    phone:   str\n    purpose: str\n    message: str\n    @field_validator(\"name\")\n    @classmethod\n    def name_valid(cls, v: str) -> str:\n        v = v.strip()",
-        "detail": "backend.app.schemas.contact_schema",
-        "documentation": {}
-    },
-    {
-        "label": "ALLOWED_PURPOSES",
-        "kind": 5,
-        "importPath": "backend.app.schemas.contact_schema",
-        "description": "backend.app.schemas.contact_schema",
-        "peekOfCode": "ALLOWED_PURPOSES = {\n    \"Internship Offer\", \"Freelance Project\",\n    \"Research Collaboration\", \"Job Opportunity\", \"Just Saying Hi\"\n}\nclass ContactSchema(BaseModel):\n    name:    str\n    email:   EmailStr\n    phone:   str\n    purpose: str\n    message: str",
+        "peekOfCode": "class ContactSchema(BaseModel):\n    name:    str\n    phone:   str\n    email:   Optional[str] = \"\"\n    plan:    Optional[str] = \"Not specified\"\n    message: str\n    @field_validator(\"name\")\n    @classmethod\n    def name_valid(cls, v: str) -> str:\n        v = v.strip()",
         "detail": "backend.app.schemas.contact_schema",
         "documentation": {}
     },
@@ -277,7 +252,7 @@
         "kind": 5,
         "importPath": "backend.app.services.contact_service",
         "description": "backend.app.services.contact_service",
-        "peekOfCode": "logger = logging.getLogger(__name__)\nasync def save_contact(form: ContactSchema) -> None:\n    \"\"\"Insert sanitized form data into Supabase contacts table.\"\"\"\n    # ── Guard: check credentials are present ─────────────\n    if not settings.SUPABASE_URL or not settings.SUPABASE_KEY:\n        raise RuntimeError(\n            \"Supabase is not configured. \"\n            \"Set SUPABASE_URL and SUPABASE_KEY in your environment variables.\"\n        )\n    try:",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nasync def save_contact(form: ContactSchema) -> None:\n    if not settings.SUPABASE_URL or not settings.SUPABASE_KEY:\n        raise RuntimeError(\"Supabase is not configured.\")\n    try:\n        client = get_supabase()\n        data = {\n            \"name\":    sanitize(form.name),\n            \"email\":   sanitize(form.email or \"\"),\n            \"phone\":   sanitize(form.phone),",
         "detail": "backend.app.services.contact_service",
         "documentation": {}
     },
@@ -349,7 +324,7 @@
         "kind": 5,
         "importPath": "backend.app.main",
         "description": "backend.app.main",
-        "peekOfCode": "logger = logging.getLogger(__name__)\nlimiter = Limiter(key_func=get_remote_address)\n@asynccontextmanager\nasync def lifespan(app: FastAPI):\n    # Print full settings validation on every startup — visible in Render logs\n    settings.validate()\n    logger.info(\"Portfolio API started\")\n    yield\n    logger.info(\"Portfolio API stopped\")\napp = FastAPI(",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nlimiter = Limiter(key_func=get_remote_address, default_limits=[\"200/day\", \"50/hour\"])\n@asynccontextmanager\nasync def lifespan(app: FastAPI):\n    settings.validate()\n    logger.info(\"Portfolio API started\")\n    yield\n    logger.info(\"Portfolio API stopped\")\napp = FastAPI(\n    title=\"Pannel Dhruvesh — Portfolio API\",",
         "detail": "backend.app.main",
         "documentation": {}
     },
@@ -358,7 +333,7 @@
         "kind": 5,
         "importPath": "backend.app.main",
         "description": "backend.app.main",
-        "peekOfCode": "limiter = Limiter(key_func=get_remote_address)\n@asynccontextmanager\nasync def lifespan(app: FastAPI):\n    # Print full settings validation on every startup — visible in Render logs\n    settings.validate()\n    logger.info(\"Portfolio API started\")\n    yield\n    logger.info(\"Portfolio API stopped\")\napp = FastAPI(\n    title=\"Pannel Dhruvesh — Portfolio API\",",
+        "peekOfCode": "limiter = Limiter(key_func=get_remote_address, default_limits=[\"200/day\", \"50/hour\"])\n@asynccontextmanager\nasync def lifespan(app: FastAPI):\n    settings.validate()\n    logger.info(\"Portfolio API started\")\n    yield\n    logger.info(\"Portfolio API stopped\")\napp = FastAPI(\n    title=\"Pannel Dhruvesh — Portfolio API\",\n    version=\"1.0.0\",",
         "detail": "backend.app.main",
         "documentation": {}
     },
@@ -376,7 +351,25 @@
         "kind": 5,
         "importPath": "backend.app.main",
         "description": "backend.app.main",
-        "peekOfCode": "app.state.limiter = limiter\napp.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)\n# Handle wildcard CORS correctly\n_origins     = settings.ALLOWED_ORIGINS\n_allow_all   = _origins == [\"*\"]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"] if _allow_all else _origins,\n    allow_credentials=False if _allow_all else True,\n    allow_methods=[\"GET\", \"POST\", \"OPTIONS\"],",
+        "peekOfCode": "app.state.limiter = limiter\napp.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)\n# ── Global unhandled exception handler ───────────────────\n@app.exception_handler(Exception)\nasync def global_exception_handler(request: Request, exc: Exception):\n    logger.error(f\"Unhandled exception: {exc}\", exc_info=True)\n    return JSONResponse(\n        status_code=500,\n        content={\"status\": \"error\", \"message\": \"Internal server error\"},\n    )",
+        "detail": "backend.app.main",
+        "documentation": {}
+    },
+    {
+        "label": "_allow_all",
+        "kind": 5,
+        "importPath": "backend.app.main",
+        "description": "backend.app.main",
+        "peekOfCode": "_allow_all = _origins == [\"*\"]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"] if _allow_all else _origins,\n    allow_credentials=False if _allow_all else True,\n    allow_methods=[\"GET\", \"POST\", \"OPTIONS\"],\n    allow_headers=[\"Content-Type\", \"Authorization\", \"Accept\"],\n)\n# ── Security + request size middleware ───────────────────\nMAX_BODY = 64 * 1024  # 64 KB max request body",
+        "detail": "backend.app.main",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_BODY",
+        "kind": 5,
+        "importPath": "backend.app.main",
+        "description": "backend.app.main",
+        "peekOfCode": "MAX_BODY = 64 * 1024  # 64 KB max request body\n@app.middleware(\"http\")\nasync def security_and_size(request: Request, call_next):\n    # Block oversized requests (prevents memory exhaustion)\n    content_length = request.headers.get(\"content-length\")\n    if content_length and int(content_length) > MAX_BODY:\n        return JSONResponse(status_code=413, content={\"detail\": \"Request too large\"})\n    response = await call_next(request)\n    # Security headers\n    response.headers[\"X-Content-Type-Options\"]  = \"nosniff\"",
         "detail": "backend.app.main",
         "documentation": {}
     }
